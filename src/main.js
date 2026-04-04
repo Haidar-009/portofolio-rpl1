@@ -212,7 +212,7 @@ const daftarSiswa = [
   },
   {
     nama: "Sahla",
-    role: "UI/UX",
+    role: "Head of Sanitation",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
