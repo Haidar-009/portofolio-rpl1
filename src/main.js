@@ -100,7 +100,7 @@ const daftarSiswa = [
   },
   {
     nama: "Ibnu",
-    role: "UI/UX",
+    role: "Head of Security",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -132,7 +132,7 @@ const daftarSiswa = [
   },
   {
     nama: "Lila",
-    role: "UI/UX",
+    role: "Discipline Coordinator",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
