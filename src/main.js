@@ -12,7 +12,7 @@ const clickSound = new Audio(
 const daftarSiswa = [
   {
     nama: "Adinda",
-    role: "Roblox",
+    role: "Head of Sanitation",
     bio: "Roblox adalah bagian dari hidup aku.",
     ig: "#",
     github: "#",
@@ -20,7 +20,7 @@ const daftarSiswa = [
   },
   {
     nama: "Afita",
-    role: "Backend",
+    role: "Sports Coordinator",
     bio: "Suka  Kopi.",
     ig: "#",
     github: "#",
@@ -52,7 +52,7 @@ const daftarSiswa = [
   },
   {
     nama: "Cinta",
-    role: "UI/UX",
+    role: "Assistant Treasurer",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -92,7 +92,7 @@ const daftarSiswa = [
   },
   {
     nama: "Haidar",
-    role: "UI/UX",
+    role: "FULL Stack developer",
     bio: "Creator web ini.",
     ig: "#",
     github: "#",
@@ -116,7 +116,7 @@ const daftarSiswa = [
   },
   {
     nama: "Khuludah",
-    role: "UI/UX",
+    role: "Secretary",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -124,7 +124,7 @@ const daftarSiswa = [
   },
   {
     nama: "Lezio",
-    role: "UI/UX",
+    role: "Class VP",
     bio: "Mie ayam Aseli damay.",
     ig: "#",
     github: "#",
@@ -164,7 +164,7 @@ const daftarSiswa = [
   },
   {
     nama: "M.Ilham",
-    role: "UI/UX",
+    role: "Sports Coordinator",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -172,7 +172,7 @@ const daftarSiswa = [
   },
   {
     nama: "Niis",
-    role: "UI/UX",
+    role: "Religious Affairs Coordinator",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -204,7 +204,7 @@ const daftarSiswa = [
   },
   {
     nama: "Sabila",
-    role: "UI/UX",
+    role: "Secretary",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -220,7 +220,7 @@ const daftarSiswa = [
   },
   {
     nama: "Saparudin",
-    role: "UI/UX",
+    role: "Nok Nang",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -236,7 +236,7 @@ const daftarSiswa = [
   },
   {
     nama: "Triana ",
-    role: "UI/UX",
+    role: "Treasurer",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
