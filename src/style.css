@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite alternate;
+}
+/* KUNCI: Supaya Tailwind v4 mau baca class .dark di tag HTML */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Transisi warna halus saat pindah mode */
+    @apply transition-colors duration-500 antialiased;
+  }
+}
+
+/* Style untuk tombol filter yang sedang aktif */
+.filter-btn-active {
+  @apply !bg-indigo-600 !text-white !shadow-lg !shadow-indigo-200;
+}
+
+/* Custom Scrollbar biar makin kece */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-50 dark:bg-slate-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-indigo-200 dark:bg-slate-800 rounded-full hover:bg-indigo-400;
+}
+
+#modal-siswa.flex {
+  animation: fadeIn 0.3s ease-out;
+}
+
+#modal-siswa > div:last-child {
+  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#lightbox.flex {
+  animation: fadeIn 0.4s ease;
+}
+
+#lightbox-img {
+  animation: zoomIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
