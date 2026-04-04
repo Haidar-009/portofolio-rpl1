@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Class-XI_RPL_1-6366F1?style=for-the-badge&logo=github" />
-  <img src="https://img.shields.io/badge/Total_Students-36-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Total_Students-32-green?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Tech-Web_Development-orange?style=for-the-badge&logo=html5" />
 </p>
 
