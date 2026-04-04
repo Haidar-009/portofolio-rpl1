@@ -438,7 +438,7 @@ document.addEventListener("keydown", (e) => {
 
 // --- LOGIKA TYPING EFFECT ---
 const txtElement = document.getElementById("typing-text");
-const words = ["CREATIVE.", "SOLID.", "XI RPL 1.", "FUTURE CODER."];
+const words = ["CREATIVE", "SOLID", "XI RPL 1", "FUTURE CODER"];
 let wait = 2000; // Jeda waktu saat teks sudah lengkap terketik
 let isDeleting = false;
 let txt = "";
