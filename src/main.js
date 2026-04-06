@@ -220,9 +220,9 @@ const daftarSiswa = [
   },
   {
     nama: "Saparudin",
-    role: "Nok Nang",
-    bio: "Desain adalah passion.",
-    ig: "#",
+    role: "Paskibra",
+    bio: "Muda berkelana tua bercerita",
+    ig: "https://www.instagram.com/faar07_?igsh=dnNvc3JnZzVwam9k&utm_source=qr",
     github: "#",
     foto: "/img/Saparudin.jpg",
   },
