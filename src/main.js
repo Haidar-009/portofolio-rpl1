@@ -117,9 +117,9 @@ const daftarSiswa = [
   {
     nama: "Khuludah",
     role: "Secretary",
-    bio: "Desain adalah passion.",
-    ig: "#",
-    github: "#",
+    bio: "Seperti teratai, biarkan dirimu tumbuh indah meski harus berawal dari kolam yang berlumpur.",
+    ig: "https://www.instagram.com/khldh.hh?igsh=MWRicnd3dXAzaDhiMg==",
+    github: "https://www.tiktok.com/@kldefghi?_r=1&_t=ZS-95IlOzG96Dy",
     foto: "/img/Khuludah.jpg",
   },
   {
