@@ -125,9 +125,9 @@ const daftarSiswa = [
   {
     nama: "Lezio",
     role: "Class VP",
-    bio: "Mie ayam Aseli damay.",
-    ig: "#",
-    github: "#",
+    bio: "hiduplah dengan karaktermu sendiri, jangan merubah dirimu hanya untuk di sukai.",
+    ig: "https://www.instagram.com/zynive_?igsh=MW1kaTdjbDVuY3RvaA==",
+    github: "https://www.tiktok.com/@leziozio4?_r=1&_t=ZS-95IsY7VkUQj",
     foto: "/img/Lezio.jpg",
   },
   {
