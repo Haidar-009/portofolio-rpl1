@@ -577,6 +577,11 @@ const quotes = [
   "Logika komputer itu pasti, tapi masa depan XI RPL 1 harus lebih pasti",
   "Jangan takut sama 'Syntax Error', takutlah kalau kamu gak punya semangat lagi",
   "Setiap baris kode yang kita tulis hari ini adalah investasi buat masa depan",
+  "Solidaritas RPL 1 itu kayak Git: Sekali di-commit, gak bakal hilang.",
+  "Kita bukan cuma sekadar teman sekelas, kita adalah satu repositori.",
+  "RPL 1: Datang sebagai user, pulang sebagai creator.",
+  "Kompak itu kuncinya, kalau satu error, semua ikut debugging.",
+  "Di sini kita belajar, bukan cuma ngetik tapi juga membangun masa depan.",
 ];
 
 function shuffleQuote() {
