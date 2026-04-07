@@ -59,6 +59,14 @@ const daftarSiswa = [
     foto: "/img/Cinta.jpg",
   },
   {
+    nama: "Cracas",
+    role: "Assistant Treasurer",
+    bio: "Desain adalah passion.",
+    ig: "#",
+    github: "#",
+    foto: "/img/cracas.jpg",
+  },
+  {
     nama: "Danar",
     role: "UI/UX",
     bio: "Desain adalah passion.",
@@ -73,6 +81,14 @@ const daftarSiswa = [
     ig: "#",
     github: "#",
     foto: "/img/Deyah.jpg",
+  },
+  {
+    nama: "Dzaskia",
+    role: "UI/UX",
+    bio: "Desain adalah passion.",
+    ig: "#",
+    github: "#",
+    foto: "/img/Dzaskia.jpg",
   },
   {
     nama: "Fika",
@@ -276,6 +292,22 @@ if (menuBtn && mobileMenu) {
   });
 }
 
+// Efek Running Text Programmer Style
+const run1 = document.getElementById("run-1");
+const run2 = document.getElementById("run-2");
+const run3 = document.getElementById("run-3");
+
+window.addEventListener("scroll", () => {
+  const scrollValue = window.scrollY;
+
+  // Baris 1 & 3: Gerak ke kiri (Kecepatan Santai)
+  if (run1) run1.style.transform = `translateX(-${scrollValue * 0.25}px)`;
+  if (run3) run3.style.transform = `translateX(-${scrollValue * 0.15}px)`;
+
+  // Baris 2: Gerak ke kanan (Paling Cepat & Offset biar gak bolong)
+  if (run2) run2.style.transform = `translateX(${scrollValue * 0.45 - 800}px)`;
+});
+
 const container = document.getElementById("siswa-container");
 
 // 2. FUNGSI RENDER (Hanya satu fungsi, sudah mendukung foto asli)
@@ -297,7 +329,7 @@ function renderSiswa(data) {
            onclick="openModal('${siswa.nama}')" 
            class="group cursor-pointer bg-white dark:bg-slate-800 p-6 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 hover:border-indigo-500 transition-all duration-700 hover:-translate-y-3 hover:shadow-2xl shadow-indigo-100/50 dark:shadow-none">
         
-        <div class="aspect-square rounded-[2rem] overflow-hidden mb-6 bg-slate-50 dark:bg-slate-900 shadow-inner relative">
+        <div class="aspect-square rounded-4xl overflow-hidden mb-6 bg-slate-50 dark:bg-slate-900 shadow-inner relative">
           <div class="absolute inset-0 bg-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <img src="${imageSrc}" 
@@ -366,14 +398,47 @@ if (searchInput) {
   });
 }
 
-// 5. DARK MODE
+// 5. DARK MODE (DENGAN MEMORY)
 const darkToggle = document.getElementById("dark-toggle");
+const darkIcon = document.getElementById("dark-icon");
+
+// Fungsi untuk update ikon saja
+const updateIcon = () => {
+  if (darkIcon) {
+    darkIcon.innerText = document.documentElement.classList.contains("dark")
+      ? "☀️"
+      : "🌙";
+  }
+};
+
+// Cek simpanan sebelumnya pas web baru dibuka
+if (
+  localStorage.theme === "dark" ||
+  (!("theme" in localStorage) &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+  document.documentElement.classList.add("dark");
+} else {
+  document.documentElement.classList.remove("dark");
+}
+updateIcon();
+
 if (darkToggle) {
   darkToggle.addEventListener("click", () => {
-    clickSound.play();
+    // Efek Suara
+    if (typeof clickSound !== "undefined") clickSound.play();
+
+    // Switch Class
     document.documentElement.classList.toggle("dark");
-    document.getElementById("dark-icon").innerText =
-      document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
+
+    // Simpan pilihan ke Browser (LocalStorage)
+    if (document.documentElement.classList.contains("dark")) {
+      localStorage.theme = "dark";
+    } else {
+      localStorage.theme = "light";
+    }
+
+    updateIcon();
   });
 }
 
@@ -500,6 +565,84 @@ const startCounter = (entries, observer) => {
     }
   });
 };
+
+// Coding Quotes Logic
+const quotes = [
+  "Hidup itu kayak koding, banyak error tapi harus tetap dicari solusinya",
+  "Satu titik koma (;) bisa ngerusak segalanya, begitu juga satu kesalahan kecil dalam hidup",
+  "Jangan cuma jago copas kode, tapi harus paham logikanya juga",
+  "Gak ada bug yang gak bisa diperbaiki, yang ada cuma programmer yang kurang kopi",
+  "Masa depan kita itu di-build, bukan cuma di-download",
+  "Error itu biasa, yang luar biasa itu kalau kamu gak nyerah buat benerinnya",
+  "Logika komputer itu pasti, tapi masa depan XI RPL 1 harus lebih pasti",
+  "Jangan takut sama 'Syntax Error', takutlah kalau kamu gak punya semangat lagi",
+  "Setiap baris kode yang kita tulis hari ini adalah investasi buat masa depan",
+];
+
+function shuffleQuote() {
+  const quoteElement = document.getElementById("random-quote");
+  if (quoteElement) {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    quoteElement.innerText = `"${quotes[randomIndex]}"`;
+  }
+}
+
+// Jalankan saat page load
+document.addEventListener("DOMContentLoaded", shuffleQuote);
+
+const terminalInput = document.getElementById("terminal-input");
+const terminalOutput = document.getElementById("terminal-output");
+
+if (terminalInput) {
+  terminalInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      const command = this.value.toLowerCase().trim();
+      let response = "";
+
+      if (command === "help") {
+        response =
+          "Available commands: help, class-info, member-count, creator, clear";
+      } else if (command === "class-info") {
+        response = "XI RPL 1: Kelas pejuang koding, solid, dan penuh kejutan.";
+      } else if (command === "member-count") {
+        response = "Total member: 32 Students & 1 Mentor.";
+      } else if (command === "creator") {
+        response = "Website ini dibangun  oleh Haidar.";
+      } else if (command === "sudo su") {
+        response = "Nice try, tapi di sini Haidar yang pegang root! 😎";
+      } else if (command === "ibu-fitri") {
+        response = "Wali Kelas terbaik yang selalu support XI RPL 1! ✨";
+      } else if (command === "rpl1") {
+        response =
+          '<span class="text-yellow-400">SOLID! SOLID! SOLID! 🚀</span>';
+      } else if (command === "clear") {
+        terminalOutput.innerHTML = "";
+        this.value = "";
+        return;
+      } else if (command === "") {
+        response = "";
+      } else {
+        response = `Command not found: ${command}. Type 'help' for assistance.`;
+      }
+
+      // Tampilkan output
+      const line = document.createElement("div");
+      line.innerHTML = `<span class="text-green-400">PS D:\\RPL1></span> <span class="text-white">${command}</span><br><span class="text-slate-300">${response}</span>`;
+      line.className = "mb-2";
+      terminalOutput.appendChild(line);
+
+      // Auto scroll ke bawah
+      const terminalBody = document.getElementById("terminal-body");
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+
+      this.value = "";
+    }
+  });
+}
+
+document.getElementById("terminal-body").addEventListener("click", () => {
+  document.getElementById("terminal-input").focus();
+});
 
 const counterObserver = new IntersectionObserver(startCounter, {
   threshold: 0.5,

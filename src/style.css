@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer utilities {
   .animation-delay-2000 {
@@ -46,6 +43,12 @@ html {
     scroll-behavior: smooth;
   }
 
+  *,
+  ::after,
+  ::before {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+
   body {
     /* Transisi warna halus saat pindah mode */
     @apply transition-colors duration-500 antialiased;
@@ -54,7 +57,7 @@ html {
 
 /* Style untuk tombol filter yang sedang aktif */
 .filter-btn-active {
-  @apply !bg-indigo-600 !text-white !shadow-lg !shadow-indigo-200;
+  @apply bg-indigo-600! text-white! shadow-lg! shadow-indigo-200!;
 }
 
 /* Custom Scrollbar biar makin kece */
