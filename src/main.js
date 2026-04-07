@@ -582,6 +582,11 @@ const quotes = [
   "RPL 1: Datang sebagai user, pulang sebagai creator.",
   "Kompak itu kuncinya, kalau satu error, semua ikut debugging.",
   "Di sini kita belajar, bukan cuma ngetik tapi juga membangun masa depan.",
+  "Dunia ini berjalan di atas kode, dan kitalah yang memegang keyboard-nya.",
+  "Jangan berhenti pas capek, berhentilah pas programnya sudah 'Running'.",
+  "Dunia butuh solusimu, bukan cuma keluhanmu tentang error.",
+  "Setiap algoritma yang kamu buat hari ini adalah investasi buat masa depanmu.",
+  "Teknologi bakal terus update, pastikan skill kamu gak 'deprecated'.",
 ];
 
 function shuffleQuote() {
