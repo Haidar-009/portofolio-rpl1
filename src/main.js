@@ -587,6 +587,12 @@ const quotes = [
   "Dunia butuh solusimu, bukan cuma keluhanmu tentang error.",
   "Setiap algoritma yang kamu buat hari ini adalah investasi buat masa depanmu.",
   "Teknologi bakal terus update, pastikan skill kamu gak 'deprecated'.",
+  "Solidaritas RPL 1 itu kayak Git: Sekali di-commit, gak bakal hilang.",
+  "XI RPL 1: Dimana logika dan perasaan bertemu dalam satu file .json.",
+  "Kita bukan cuma teman sekelas, kita adalah satu ekosistem yang saling support.",
+  "Debugging bareng itu lebih asik daripada pusing sendirian.",
+  "RPL 1: Datang sebagai user, berproses sebagai creator, lulus sebagai legend.",
+  "Jangan biarkan konflik internal jadi 'merge conflict' di kelas kita.",
 ];
 
 function shuffleQuote() {
