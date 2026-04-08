@@ -155,12 +155,12 @@ const daftarSiswa = [
     foto: "/img/Lila.jpg",
   },
   {
-    nama: "Maulidiah",
-    role: "UI/UX",
-    bio: "Desain adalah passion.",
-    ig: "#",
-    github: "#",
-    foto: "/img/Maulidiah.jpg",
+    nama: "Maulidiah Nurkhasanah",
+    role: "Cooking",
+    bio: "at least i’ve tried to be better every day",
+    ig: "https://www.instagram.com/lldiiaaaa?igsh=ODI4bGFidGI5OWcz&utm_source=qr",
+    github: "https://www.tiktok.com/@l1lidiaa?_r=1&_t=ZS-95Im7tOfe5d",
+    foto: "/img/Maulidiah.jpeg",
   },
   {
     nama: "Maulin",
