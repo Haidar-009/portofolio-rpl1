@@ -276,18 +276,27 @@ const mobileLinks = document.querySelectorAll(".mobile-link");
 
 if (menuBtn && mobileMenu) {
   menuBtn.addEventListener("click", () => {
+    // 1. Toggle class hidden (muncul/hilang)
     mobileMenu.classList.toggle("hidden");
-    // Opsional: ganti icon hamburger jadi silang (X)
+
+    // 2. Toggle class flex (penting supaya layoutnya vertikal rapi)
+    mobileMenu.classList.toggle("flex");
+
+    // Ganti icon hamburger jadi silang (X)
     const isHidden = mobileMenu.classList.contains("hidden");
     menuBtn.innerHTML = isHidden
       ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>`
       : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
   });
 
-  // Otomatis tutup menu kalau link diklik (biar gak nutupin layar)
+  // Otomatis tutup menu kalau link diklik
   mobileLinks.forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex"); // Jangan lupa hapus flex-nya juga
+
+      // Kembalikan icon ke hamburger
+      menuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>`;
     });
   });
 }
