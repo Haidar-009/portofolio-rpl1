@@ -632,15 +632,16 @@ const terminalOutput = document.getElementById("terminal-output");
 if (terminalInput) {
   terminalInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
-      setTimeout(() => {
-        this.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, 100);
+      e.preventDefault(); // Mencegah baris baru yang nggak perlu
 
-      this.value = "";
-
+      // 1. Ambil nilai input DULU sebelum dihapus
       const command = this.value.toLowerCase().trim();
       let response = "";
 
+      // 2. Cek kalau kosong, jangan proses apa-apa
+      if (command === "") return;
+
+      // 3. Logika Perintah
       if (command === "help") {
         response =
           "Available commands: help, class-info, member-count, creator, clear";
@@ -649,48 +650,41 @@ if (terminalInput) {
       } else if (command === "member-count") {
         response = "Total member: 32 Students & 1 Mentor.";
       } else if (command === "creator") {
-        response = "Website ini dibangun  oleh Haidar.";
+        response = "Website ini dibangun oleh Haidar.";
       } else if (command === "sudo su") {
         response = "Nice try, tapi di sini Haidar yang pegang root! 😎";
-      } else if (command === "ibu-fitri") {
-        response = "Wali Kelas terbaik yang selalu support XI RPL 1! ✨";
-      } else if (command === "rpl1") {
-        response =
-          '<span class="text-yellow-400">SOLID! SOLID! SOLID! 🚀</span>';
       } else if (command === "clear") {
         terminalOutput.innerHTML = "";
         this.value = "";
         return;
-      } else if (command === "") {
-        response = "";
       } else {
         response = `Command not found: ${command}. Type 'help' for assistance.`;
       }
 
-      // Tampilkan output
+      // 4. Tampilkan ke Terminal Output
       const line = document.createElement("div");
-      line.innerHTML = `<span class="text-green-400">PS D:\\RPL1></span> <span class="text-white">${command}</span><br><span class="text-slate-300">${response}</span>`;
-      line.className = "mb-2";
+      line.className = "mb-2 font-mono";
+      line.innerHTML = `
+        <span class="text-green-400">PS D:\\RPL1></span> 
+        <span class="text-white">${command}</span><br>
+        <span class="text-slate-300">${response}</span>
+      `;
       terminalOutput.appendChild(line);
 
-      // Auto scroll ke bawah
+      // 5. BARU SEKARANG hapus isi input-nya
+      this.value = "";
+
+      // 6. Scroll otomatis
       const terminalBody = document.getElementById("terminal-body");
       terminalBody.scrollTop = terminalBody.scrollHeight;
 
-      this.value = "";
+      // Mobile Support: Pastikan tetap kelihatan
+      setTimeout(() => {
+        this.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 100);
     }
   });
 }
-
-document.getElementById("terminal-body").addEventListener("click", () => {
-  const input = document.getElementById("terminal-input");
-  input.focus();
-
-  // Tambahan buat mobile: Scroll ke input saat diklik biar nggak ketutup keyboard
-  setTimeout(() => {
-    input.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, 300);
-});
 
 const terminalBody = document.getElementById("terminal-body");
 const triggerFocus = () => {

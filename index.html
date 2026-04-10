@@ -273,16 +273,14 @@
             Welcome to XI RPL 1 Terminal. Type 'help' to see commands.
           </div>
 
-          <div id="terminal-output"></div>
+          <div id="terminal-output" class="font-mono text-sm"></div>
 
-          <div class="flex items-center gap-2 mt-2">
-            <span class="text-green-600 dark:text-green-400 font-bold"
-              >PS C:\RPL1></span
-            >
+          <div class="flex items-center gap-2 font-mono text-sm">
+            <span class="text-green-400 shrink-0">PS C:\RPL1&gt;</span>
             <input
               type="text"
               id="terminal-input"
-              class="..."
+              class="bg-transparent border-none outline-none focus:outline-none focus:ring-0 text-white w-full p-0 flex-1"
               autocomplete="off"
               autocorrect="off"
               autocapitalize="none"
