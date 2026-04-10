@@ -642,33 +642,79 @@ const terminalOutput = document.getElementById("terminal-output");
 if (terminalInput) {
   terminalInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
-      e.preventDefault(); // Mencegah baris baru yang nggak perlu
+      e.preventDefault();
 
-      // 1. Ambil nilai input DULU sebelum dihapus
+      // 1. Ambil nilai input
       const command = this.value.toLowerCase().trim();
       let response = "";
 
-      // 2. Cek kalau kosong, jangan proses apa-apa
+      // 2. Cek kalau kosong
       if (command === "") return;
 
-      // 3. Logika Perintah
-      if (command === "help") {
-        response =
-          "Available commands: help, class-info, member-count, creator, clear";
-      } else if (command === "class-info") {
-        response = "XI RPL 1: Kelas pejuang koding, solid, dan penuh kejutan.";
-      } else if (command === "member-count") {
-        response = "Total member: 32 Students & 1 Mentor.";
-      } else if (command === "creator") {
-        response = "Website ini dibangun oleh Haidar.";
-      } else if (command === "sudo su") {
-        response = "Nice try, tapi di sini Haidar yang pegang root! 😎";
-      } else if (command === "clear") {
-        terminalOutput.innerHTML = "";
-        this.value = "";
-        return;
-      } else {
-        response = `Command not found: ${command}. Type 'help' for assistance.`;
+      // 3. Logika Perintah (Switch Case)
+      switch (command) {
+        case "help":
+          response = `
+            <div class="grid grid-cols-2 gap-2 mt-1 text-yellow-400">
+              <div>• class-info</div> <div>• member-count</div>
+              <div>• creator</div>    <div>• social</div>
+              <div>• mentor</div>     <div>• motivation</div>
+              <div>• clear</div>
+            </div>`;
+          break;
+
+        case "class-info":
+          response = "XI RPL 1: Pejuang koding. Solidaritas tanpa batas!";
+          break;
+
+        case "mentor":
+          response = "Our Mentor is Fitri Yulianti, S.Pd.";
+          break;
+
+        case "member-count":
+          response = "Total member: 32 Siswa & 1 Guru Wali kelas.";
+          break;
+
+        case "creator":
+          response = "Website ini dideploy  oleh Haidar.";
+          break;
+
+        case "social":
+          response =
+            'Instagram: <a href="https://www.instagram.com/xi.rpl1damay?igsh=dXNkYmZ1dnRvY3Bz" target="_blank" class="text-blue-400 underline">@xi.rpl1damay</a>';
+          break;
+
+        case "motivation":
+          const quotes = [
+            "Koding hari ini, Lulus besok! 🎓",
+            "Error adalah cara Tuhan bilang kita harus istirahat. ☕",
+            "Jadilah programmer yang solutif, bukan cuma tukang copas. 💻",
+          ];
+          response = quotes[Math.floor(Math.random() * quotes.length)];
+          break;
+
+        case "hacker":
+          response =
+            '<span class="text-red-500 animate-pulse">ACCESS DENIED. Your IP has been logged. 😈</span>';
+          break;
+
+        case "sudo su":
+          response =
+            '<span class="text-red-500 animate-pulse">ACCESS DENIED. Sory ya dek Haidar yang pegang root 😈</span>';
+          break;
+
+        case "rpl1":
+          response =
+            '<span class="text-green-500 e">Solid Solid Solid 😏 </span>';
+          break;
+
+        case "clear":
+          terminalOutput.innerHTML = "";
+          this.value = "";
+          return;
+
+        default:
+          response = `Command not found: <span class="text-red-400">${command}</span>. Type 'help' to see list.`;
       }
 
       // 4. Tampilkan ke Terminal Output
@@ -681,14 +727,16 @@ if (terminalInput) {
       `;
       terminalOutput.appendChild(line);
 
-      // 5. BARU SEKARANG hapus isi input-nya
+      // 5. Hapus isi input
       this.value = "";
 
       // 6. Scroll otomatis
       const terminalBody = document.getElementById("terminal-body");
-      terminalBody.scrollTop = terminalBody.scrollHeight;
+      if (terminalBody) {
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
 
-      // Mobile Support: Pastikan tetap kelihatan
+      // Mobile Support
       setTimeout(() => {
         this.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }, 100);
