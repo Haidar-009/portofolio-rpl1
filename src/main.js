@@ -28,7 +28,7 @@ const daftarSiswa = [
   },
   {
     nama: "Aisna",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -36,7 +36,7 @@ const daftarSiswa = [
   },
   {
     nama: "Atik",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -44,7 +44,7 @@ const daftarSiswa = [
   },
   {
     nama: "Atika sari",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -60,7 +60,7 @@ const daftarSiswa = [
   },
   {
     nama: "Cracas",
-    role: "Assistant Treasurer",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -68,7 +68,7 @@ const daftarSiswa = [
   },
   {
     nama: "Danar",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -76,7 +76,7 @@ const daftarSiswa = [
   },
   {
     nama: "Deyah",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -84,7 +84,7 @@ const daftarSiswa = [
   },
   {
     nama: "Dzaskia",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -92,7 +92,7 @@ const daftarSiswa = [
   },
   {
     nama: "Fika",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -100,7 +100,7 @@ const daftarSiswa = [
   },
   {
     nama: "Grasela",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -124,7 +124,7 @@ const daftarSiswa = [
   },
   {
     nama: "Kartika",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -164,7 +164,7 @@ const daftarSiswa = [
   },
   {
     nama: "Maulin",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -172,7 +172,7 @@ const daftarSiswa = [
   },
   {
     nama: "M.Hafidz",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -196,7 +196,7 @@ const daftarSiswa = [
   },
   {
     nama: "Nyimas",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -204,7 +204,7 @@ const daftarSiswa = [
   },
   {
     nama: "Panca",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -212,7 +212,7 @@ const daftarSiswa = [
   },
   {
     nama: "Rehan",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -244,7 +244,7 @@ const daftarSiswa = [
   },
   {
     nama: "Sri ",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
@@ -260,7 +260,7 @@ const daftarSiswa = [
   },
   {
     nama: "veni ",
-    role: "UI/UX",
+    role: "Student",
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
