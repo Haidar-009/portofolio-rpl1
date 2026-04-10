@@ -632,6 +632,12 @@ const terminalOutput = document.getElementById("terminal-output");
 if (terminalInput) {
   terminalInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
+      setTimeout(() => {
+        this.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 100);
+
+      this.value = "";
+
       const command = this.value.toLowerCase().trim();
       let response = "";
 
@@ -677,8 +683,22 @@ if (terminalInput) {
 }
 
 document.getElementById("terminal-body").addEventListener("click", () => {
-  document.getElementById("terminal-input").focus();
+  const input = document.getElementById("terminal-input");
+  input.focus();
+
+  // Tambahan buat mobile: Scroll ke input saat diklik biar nggak ketutup keyboard
+  setTimeout(() => {
+    input.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 300);
 });
+
+const terminalBody = document.getElementById("terminal-body");
+const triggerFocus = () => {
+  terminalInput.focus();
+};
+
+terminalBody.addEventListener("click", triggerFocus);
+terminalBody.addEventListener("touchstart", triggerFocus);
 
 const counterObserver = new IntersectionObserver(startCounter, {
   threshold: 0.5,

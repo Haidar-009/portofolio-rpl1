@@ -83,28 +83,27 @@
             </svg>
           </button>
         </div>
-
-        <div
-          id="mobile-menu"
-          class="absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-6 flex-col gap-4 shadow-xl hidden md:hidden transition-all duration-300"
+      </div>
+      <div
+        id="mobile-menu"
+        class="hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-xl md:hidden z-[60]"
+      >
+        <a
+          href="#home"
+          class="mobile-link font-bold py-2 border-b border-slate-50 dark:border-slate-800"
+          >Home</a
         >
-          <a
-            href="#home"
-            class="mobile-link font-bold py-2 border-b border-slate-50 dark:border-slate-800"
-            >Home</a
-          >
-          <a
-            href="#teacher"
-            class="mobile-link font-bold py-2 border-b border-slate-50 dark:border-slate-800"
-            >Teacher</a
-          >
-          <a
-            href="#gallery"
-            class="mobile-link font-bold py-2 border-b border-slate-50 dark:border-slate-800"
-            >Student</a
-          >
-          <a href="#album" class="mobile-link font-bold py-2">Album</a>
-        </div>
+        <a
+          href="#teacher"
+          class="mobile-link font-bold py-2 border-b border-slate-50 dark:border-slate-800"
+          >Teacher</a
+        >
+        <a
+          href="#gallery"
+          class="mobile-link font-bold py-2 border-b border-slate-50 dark:border-slate-800"
+          >Student</a
+        >
+        <a href="#album" class="mobile-link font-bold py-2">Album</a>
       </div>
     </nav>
 
@@ -283,9 +282,12 @@
             <input
               type="text"
               id="terminal-input"
-              class="bg-transparent border-none outline-none text-slate-800 dark:text-white w-full focus:ring-0 p-0"
-              autofocus
+              class="..."
               autocomplete="off"
+              autocorrect="off"
+              autocapitalize="none"
+              spellcheck="false"
+              inputmode="text"
             />
           </div>
         </div>

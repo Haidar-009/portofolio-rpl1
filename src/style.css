@@ -117,3 +117,7 @@ html {
     transform: translateY(0) scale(1);
   }
 }
+
+#terminal-input {
+  font-size: 16px !important;
+}
