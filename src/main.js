@@ -557,20 +557,22 @@ const startCounter = (entries, observer) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const counter = entry.target;
-      const updateCount = () => {
-        const target = +counter.getAttribute("data-target");
-        const count = +counter.innerText;
-        const inc = target / speed;
+      const target = +counter.getAttribute("data-target");
+      let count = 0;
+      const duration = 2000; // 2 detik animasi
+      const increment = target / (duration / 16); // 16ms = ~60fps
 
+      const updateCount = () => {
+        count += increment;
         if (count < target) {
-          counter.innerText = Math.ceil(count + inc);
-          setTimeout(updateCount, 15);
+          counter.innerText = Math.floor(count);
+          requestAnimationFrame(updateCount); // Lebih mulus dari setTimeout
         } else {
-          counter.innerText = target + (target > 1 ? "+" : ""); // Tambah tanda + jika lebih dari 1
+          counter.innerText = target + (target > 1 ? "+" : "");
         }
       };
       updateCount();
-      observer.unobserve(counter); // Berhenti mengamati setelah animasi selesai
+      observer.unobserve(counter);
     }
   });
 };
@@ -636,121 +638,167 @@ function shuffleQuote() {
 // Jalankan saat page load
 document.addEventListener("DOMContentLoaded", shuffleQuote);
 
-const terminalInput = document.getElementById("terminal-input");
-const terminalOutput = document.getElementById("terminal-output");
+const terminalInput = document.getElementById("terminalInput");
+const terminalOutput = document.getElementById("terminalOutput");
+const robotStatus = document.getElementById("robotStatus");
 
-if (terminalInput) {
-  terminalInput.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
+// 1. DATA PERINTAH (Mudah dikembangkan)
+const commandList = [
+  {
+    cmd: "developer",
+    desc: "Info pembuat sistem",
+    response:
+      "[ SYSTEM ]\nDev: Haidar\nRole: Lead Dev\nStatus: Coding with Coffee",
+  },
+  {
+    cmd: "motivasi",
+    desc: "Kata bijak hari ini",
+    response:
+      "[ WISDOM ]\n Error adalah cara Tuhan bilang kita harus istirahat sejenak.",
+  },
+  {
+    cmd: "mentor",
+    desc: "Daftar guru pembimbing",
+    response: "[ INFO ]\nMentor: Fitri Yulianti, S.Pd.",
+  },
+  { cmd: "clear", desc: "Bersihkan terminal", response: "CLEAN" },
+  {
+    cmd: "secret",
+    desc: "???",
+    response:
+      "[ SECRET ]\n Ssst! Kamu menemukan easter egg: XI RPL 1 ADALAH LEGENDA!",
+  },
+];
 
-      // 1. Ambil nilai input
-      const command = this.value.toLowerCase().trim();
-      let response = "";
+// 2. FUNGSI ANIMASI MENGETIK
+// Hapus semua versi typeWriter lama, ganti dengan ini:
+function typeWriter(text, element) {
+  let i = 0;
+  element.innerHTML = "";
 
-      // 2. Cek kalau kosong
-      if (command === "") return;
+  // Paksa warna hijau agar tetap terlihat di Light Mode
+  element.style.color = "#00FF00";
+  element.style.textShadow = "0 0 5px rgba(0, 255, 0, 0.7)";
 
-      // 3. Logika Perintah (Switch Case)
-      switch (command) {
-        case "help":
-          response = `
-            <div class="grid grid-cols-2 gap-2 mt-1 text-yellow-400">
-              <div>• class-info</div> <div>• member-count</div>
-              <div>• creator</div>    <div>• social</div>
-              <div>• mentor</div>     <div>• motivation</div>
-              <div>• clear</div>
-            </div>`;
-          break;
-
-        case "class-info":
-          response = "XI RPL 1: Pejuang koding. Solidaritas tanpa batas!";
-          break;
-
-        case "mentor":
-          response = "Our Mentor is Fitri Yulianti, S.Pd.";
-          break;
-
-        case "member-count":
-          response = "Total member: 32 Siswa & 1 Guru Wali kelas.";
-          break;
-
-        case "creator":
-          response = "Website ini dideploy  oleh Haidar.";
-          break;
-
-        case "social":
-          response =
-            'Instagram: <a href="https://www.instagram.com/xi.rpl1damay?igsh=dXNkYmZ1dnRvY3Bz" target="_blank" class="text-blue-400 underline">@xi.rpl1damay</a>';
-          break;
-
-        case "motivation":
-          const quotes = [
-            "Koding hari ini, Lulus besok! 🎓",
-            "Error adalah cara Tuhan bilang kita harus istirahat. ☕",
-            "Jadilah programmer yang solutif, bukan cuma tukang copas. 💻",
-          ];
-          response = quotes[Math.floor(Math.random() * quotes.length)];
-          break;
-
-        case "hacker":
-          response =
-            '<span class="text-red-500 animate-pulse">ACCESS DENIED. Your IP has been logged. 😈</span>';
-          break;
-
-        case "sudo su":
-          response =
-            '<span class="text-red-500 animate-pulse">ACCESS DENIED. Sory ya dek Haidar yang pegang root 😈</span>';
-          break;
-
-        case "rpl1":
-          response =
-            '<span class="text-green-500 e">Solid Solid Solid 😏 </span>';
-          break;
-
-        case "clear":
-          terminalOutput.innerHTML = "";
-          this.value = "";
-          return;
-
-        default:
-          response = `Command not found: <span class="text-red-400">${command}</span>. Type 'help' to see list.`;
+  function typing() {
+    if (i < text.length) {
+      // Cek apakah karakter saat ini adalah awal tag HTML
+      if (text.charAt(i) === "<") {
+        let tagEnd = text.indexOf(">", i);
+        if (tagEnd !== -1) {
+          element.innerHTML += text.substring(i, tagEnd + 1);
+          i = tagEnd + 1;
+          return typing();
+        }
       }
 
-      // 4. Tampilkan ke Terminal Output
-      const line = document.createElement("div");
-      line.className = "mb-2 font-mono";
-      line.innerHTML = `
-        <span class="text-green-400">PS D:\\RPL1></span> 
-        <span class="text-white">${command}</span><br>
-        <span class="text-slate-300">${response}</span>
-      `;
-      terminalOutput.appendChild(line);
+      element.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+      i++;
+      setTimeout(typing, 15);
 
-      // 5. Hapus isi input
-      this.value = "";
-
-      // 6. Scroll otomatis
-      const terminalBody = document.getElementById("terminal-body");
-      if (terminalBody) {
-        terminalBody.scrollTop = terminalBody.scrollHeight;
+      if (terminalOutput) {
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
       }
-
-      // Mobile Support
-      setTimeout(() => {
-        this.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, 100);
+    } else {
+      if (robotStatus) {
+        robotStatus.innerText = "STATUS: IDLE";
+        robotStatus.classList.remove("text-yellow-400", "text-indigo-400");
+        robotStatus.classList.add("text-emerald-400");
+      }
     }
-  });
+  }
+  typing();
 }
 
-const terminalBody = document.getElementById("terminal-body");
+function appendToTerminal(text, isUser = false) {
+  // Container utama untuk setiap baris pesan
+  const wrapper = document.createElement("div");
+  // Jika user, taruh di kanan (justify-end), jika bot di kiri (justify-start)
+  wrapper.className = `flex w-full ${isUser ? "justify-end" : "justify-start"} mb-4 px-4`;
+
+  const bubble = document.createElement("div");
+
+  if (isUser) {
+    // Style gelembung chat User (Warna Indigo/Biru)
+    bubble.className =
+      "bg-indigo-600 text-white px-4 py-2 rounded-2xl rounded-tr-none shadow-lg font-mono text-sm border border-indigo-400/30 relative z-10";
+    bubble.innerHTML = text;
+    wrapper.appendChild(bubble);
+  } else {
+    // Style gelembung chat Bot (Transparan Glassmorphism)
+    bubble.className =
+      "bg-slate-900/60 backdrop-blur-md text-[#00FF00] px-5 py-3 rounded-2xl rounded-tl-none border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.1)] font-mono text-sm leading-relaxed relative z-10 max-w-[85%]";
+    wrapper.appendChild(bubble);
+
+    // Jalankan animasi ngetik di dalam bubble bot
+    typeWriter(text, bubble);
+  }
+
+  terminalOutput.appendChild(wrapper);
+
+  // Auto scroll ke bawah
+  setTimeout(() => {
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }, 100);
+}
+
+function processCommand(cmd) {
+  const lowerCmd = cmd.toLowerCase().trim();
+  if (!lowerCmd) return;
+
+  appendToTerminal(cmd, true);
+
+  // Efek Mikir
+  robotStatus.innerText = "STATUS: THINKING";
+  robotStatus.classList.replace("text-indigo-400", "text-yellow-400");
+
+  setTimeout(() => {
+    // LOGIKA HELP DENGAN PERULANGAN
+    if (lowerCmd === "help") {
+      let helpMsg = "PERINTAH TERSEDIA:\n";
+      commandList.forEach((item) => {
+        if (item.cmd !== "secret") {
+          // Sembunyikan perintah rahasia dari list help
+          helpMsg += `- <span class="text-indigo-400">${item.cmd}</span> : ${item.desc}\n`;
+        }
+      });
+      appendToTerminal(helpMsg);
+    } else if (lowerCmd === "clear") {
+      terminalOutput.innerHTML = "";
+      robotStatus.innerText = "STATUS: IDLE";
+      robotStatus.classList.replace("text-yellow-400", "text-indigo-400");
+    } else {
+      // CARI DI LIST COMMAND
+      const found = commandList.find((c) => c.cmd === lowerCmd);
+      if (found) {
+        appendToTerminal(found.response);
+      } else {
+        appendToTerminal(
+          `[ ERROR ] Perintah '${cmd}' tidak dikenali. Ketik 'help'.`,
+        );
+      }
+    }
+  }, 400);
+}
+
+// Event Listener
+terminalInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    processCommand(terminalInput.value);
+    terminalInput.value = "";
+  }
+});
+
+// Ganti bagian terminalBody kamu menjadi seperti ini:
+const terminalSection = document.getElementById("terminal-section"); // Gunakan ID section yang ada
 const triggerFocus = () => {
-  terminalInput.focus();
+  if (terminalInput) terminalInput.focus();
 };
 
-terminalBody.addEventListener("click", triggerFocus);
-terminalBody.addEventListener("touchstart", triggerFocus);
+if (terminalSection) {
+  terminalSection.addEventListener("click", triggerFocus);
+  terminalSection.addEventListener("touchstart", triggerFocus);
+}
 
 const counterObserver = new IntersectionObserver(startCounter, {
   threshold: 0.5,
@@ -759,10 +807,17 @@ const counterObserver = new IntersectionObserver(startCounter, {
 counters.forEach((counter) => counterObserver.observe(counter));
 
 // Jalankan fungsi saat halaman selesai dimuat
-document.addEventListener("DOMContentLoaded", type);
+document.addEventListener("DOMContentLoaded", () => {
+  shuffleQuote();
+  type();
+  renderSiswa(daftarSiswa);
 
-// Jalankan init setelah halaman load
-setTimeout(initAlbum, 1000);
+  // Inisialisasi Album setelah render (beri jeda sedikit agar DOM siap)
+  setTimeout(initAlbum, 1000);
+
+  // Observasi counter
+  counters.forEach((counter) => counterObserver.observe(counter));
+});
 
 // Jalankan render pertama kali
 renderSiswa(daftarSiswa);

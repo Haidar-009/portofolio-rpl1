@@ -6,7 +6,7 @@
     <title>XI RPL Portofolio</title>
   </head>
   <body
-    class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-500"
+    class="bg-slate-950 text-slate-100 font-sans min-h-screen overflow-x-hidden"
   >
     <div
       id="cursor-blur"
@@ -246,50 +246,118 @@
 
     <!-- Terminal -->
     <section
-      class="py-20 px-6 bg-slate-50 dark:bg-slate-900/50 transition-colors duration-500"
+      id="terminal-section"
+      class="py-20 bg-slate-950 border-t border-slate-900"
     >
-      <div
-        class="max-w-3xl mx-auto rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl backdrop-blur-md"
-      >
-        <div
-          class="bg-slate-100 dark:bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-700"
-        >
-          <div class="flex gap-2">
-            <div class="w-3 h-3 rounded-full bg-red-400"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-            <div class="w-3 h-3 rounded-full bg-green-400"></div>
-          </div>
-          <span
-            class="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono"
-            >zsh — rpl1@indramayu</span
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="text-center mb-12">
+          <h2
+            class="text-4xl font-bold text-white mb-4 uppercase tracking-widest"
           >
+            AI Assistant
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
+              >Terminal</span
+            >
+          </h2>
+          <p class="text-slate-400">
+            Tanya asisten robot kami mengenai XI RPL 1.
+          </p>
         </div>
 
         <div
-          class="p-6 font-mono text-sm h-80 overflow-y-auto bg-white/80 dark:bg-slate-900/80"
-          id="terminal-body"
+          class="flex flex-col md:flex-row gap-6 bg-slate-900/50 border border-slate-800 rounded-xl p-6 shadow-2xl relative overflow-hidden"
         >
-          <div class="text-indigo-600 dark:text-indigo-400 mb-2">
-            Welcome to XI RPL 1 Terminal. Type 'help' to see commands.
+          <div
+            class="flex-shrink-0 flex flex-col items-center justify-start md:w-1/4"
+          >
+            <div
+              class="w-32 h-32 md:w-48 md:h-48 rounded-xl overflow-hidden border-2 border-slate-700 relative bg-[#050505] shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+            >
+              <img
+                id="robotAvatar"
+                src="img/terminal/download.jpg"
+                alt="AI Assistant"
+                class="w-full h-full object-contain p-2 transition-all duration-300"
+              />
+            </div>
+            <span
+              id="robotStatus"
+              class="mt-4 text-indigo-400 font-mono text-sm border border-indigo-400 px-3 py-1 rounded-full animate-pulse"
+              >STATUS: IDLE</span
+            >
           </div>
 
-          <div id="terminal-output" class="font-mono text-sm"></div>
+          <div
+            class="flex-grow flex flex-col bg-[#050505] border border-slate-700 rounded-lg overflow-hidden font-mono text-sm md:text-base h-96 relative shadow-inner"
+          >
+            <div
+              class="bg-slate-900/80 px-4 py-2 flex items-center gap-2 border-b border-slate-800"
+            >
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <span
+                class="ml-4 text-slate-500 text-xs tracking-widest font-bold"
+                >@XIRPL1-server</span
+              >
+            </div>
 
-          <div class="flex items-center gap-2 font-mono text-sm">
-            <span class="text-green-400 shrink-0">PS C:\RPL1&gt;</span>
-            <input
-              type="text"
-              id="terminal-input"
-              class="bg-transparent border-none outline-none focus:outline-none focus:ring-0 text-white w-full p-0 flex-1"
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="none"
-              spellcheck="false"
-              inputmode="text"
-            />
+            <div
+              id="terminalOutput"
+              class="relative flex-grow p-6 pl-10 space-y-4 bg-slate-900/40 backdrop-blur-md border-x border-indigo-500/30 overflow-y-auto h-80"
+            >
+              <div
+                class="pointer-events-none absolute inset-0 w-full h-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] z-50 opacity-20"
+              ></div>
+
+              <div
+                class="leading-relaxed relative z-10 text-[#00FF00] drop-shadow-[0_0_5px_rgba(0,255,0,0.5)]"
+              >
+                Halo! Saya Asisten AI XI RPL 1. Ketik 'help' untuk bantuan.
+              </div>
+            </div>
+
+            <div
+              class="p-6 border-t border-slate-800 flex items-center gap-2 bg-[#0a0a0c]"
+            >
+              <span class="text-indigo-500 font-bold whitespace-nowrap"
+                >PS C:\RPL1&gt;</span
+              >
+              <input
+                type="text"
+                id="terminalInput"
+                class="flex-grow bg-transparent border-none outline-none text-white focus:ring-0 w-full caret-indigo-500"
+                placeholder="Ketik perintah..."
+                autocomplete="off"
+              />
+            </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <section
+      id="terminal-section"
+      class="py-20 bg-slate-950 border-t border-slate-900 relative overflow-hidden"
+    >
+      <div class="absolute inset-0 z-0 opacity-30">
+        <div
+          class="absolute inset-0"
+          style="
+            background-image:
+              linear-gradient(#1e293b 1px, transparent 1px),
+              linear-gradient(90deg, #1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveGrid 20s linear infinite;
+          "
+        ></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-6 max-w-5xl relative z-10"></div>
     </section>
 
     <section id="teacher" class="py-24 px-6 bg-white dark:bg-slate-950">
@@ -360,6 +428,63 @@
         ></div>
       </div>
     </section>
+
+    <div
+      class="relative py-24 bg-slate-950 overflow-hidden border-y border-slate-900"
+    >
+      <div class="flex whitespace-nowrap opacity-10 rotate-[-2deg] mb-8">
+        <div
+          class="animate-marquee text-8xl font-black text-white uppercase tracking-tighter"
+        >
+          XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO
+          CODE •
+        </div>
+        <div
+          class="animate-marquee text-8xl font-black text-white uppercase tracking-tighter"
+        >
+          XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO
+          CODE •
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center group">
+          <div
+            class="inline-block p-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 animate-bounce mb-6"
+          >
+            <div
+              class="bg-slate-950 rounded-full px-4 py-1 text-xs font-mono text-indigo-400"
+            >
+              SYSTEM_STATUS: ACTIVE
+            </div>
+          </div>
+          <h2
+            class="text-4xl md:text-6xl font-black text-white tracking-tighter"
+          >
+            WE BUILD
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
+              >THE FUTURE</span
+            >
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex whitespace-nowrap opacity-10 rotate-[2deg] mt-8">
+        <div
+          class="animate-marquee-reverse text-8xl font-black text-white uppercase tracking-tighter"
+        >
+          DEVELOPER • CREATIVE • INNOVATIVE • DEVELOPER • CREATIVE • INNOVATIVE
+          •
+        </div>
+        <div
+          class="animate-marquee-reverse text-8xl font-black text-white uppercase tracking-tighter"
+        >
+          DEVELOPER • CREATIVE • INNOVATIVE • DEVELOPER • CREATIVE • INNOVATIVE
+          •
+        </div>
+      </div>
+    </div>
 
     <section id="album" class="py-24 px-6 bg-white dark:bg-slate-950">
       <div class="max-w-7xl mx-auto">
