@@ -785,14 +785,22 @@ function processCommand(cmd) {
     // B. PERINTAH: SUDO SU (Mode Overdrive)
     else if (lowerCmd === "sudo su") {
       const gapSection = document.getElementById("particle-gap");
+      const body = document.body; // Kita ambil body-nya
+
       appendToTerminal("ACCESS GRANTED. INITIALIZING OVERDRIVE MODE...", false);
 
+      // 1. Tambah class ke body & gap biar SEMUA jadi merah
+      body.classList.add("overdrive-active");
       gapSection.classList.add("overdrive-active");
 
       setTimeout(() => {
+        // 2. Hapus class dari body & gap biar SEMUA balik biru/normal
+        body.classList.remove("overdrive-active");
         gapSection.classList.remove("overdrive-active");
+
+        // 3. Baru panggil pesan stabil
         appendToTerminal("SYSTEM STABILIZED. NORMAL MODE RESTORED.", false);
-      }, 20000);
+      }, 20000); // 20 detik
     }
 
     // C. PERINTAH: CLEAR

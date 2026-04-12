@@ -297,3 +297,90 @@ html {
   --duration: 9s;
   font-size: 2.5rem;
 }
+
+/* Optimization for Mobile (Screen < 768px) */
+@media (max-width: 767px) {
+  /* Kurangi font terminal & padding container */
+  #terminalOutput {
+    font-size: 12px !important;
+    padding: 10px !important;
+  }
+
+  /* Buat gelembung chat lebih lebar biar teks gak kepotong-potong */
+  .max-w-\[85\%\] {
+    max-width: 95% !important;
+  }
+
+  /* Rapatkan jarak antar chat bubble */
+  .mb-4 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Sesuaikan ukuran font input di bawah */
+  #terminalInput {
+    font-size: 12px !important;
+  }
+
+  /* Sembunyikan elemen melayang yang terlalu ramai di HP */
+  .float-item:nth-child(even) {
+    display: none;
+  }
+}
+
+/* Style Dasar Logo */
+.logo-rpl {
+  font-weight: 800;
+  transition: all 0.5s ease;
+  text-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+  animation: pulse-blue 2s infinite;
+}
+
+/* Animasi Pulse Biru (Normal) */
+@keyframes pulse-blue {
+  0%,
+  100% {
+    color: #818cf8;
+    text-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+  }
+  50% {
+    color: #c7d2fe;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 1);
+  }
+}
+
+/* Animasi Pulse Merah (Overdrive Active) */
+/* Pastikan class ini dipicu oleh class 'overdrive-active' di body atau parent */
+.overdrive-active .logo-rpl {
+  animation: pulse-red 0.5s infinite !important; /* Lebih cepat & agresif */
+}
+
+@keyframes pulse-red {
+  0%,
+  100% {
+    color: #ef4444;
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+  }
+  50% {
+    color: #ff0000;
+    text-shadow: 0 0 25px rgba(255, 0, 0, 1);
+  }
+}
+
+.hover\:text-indigo-600 {
+  position: relative;
+}
+
+.hover\:text-indigo-600::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.hover\:text-indigo-600:hover::after {
+  width: 100%;
+}
