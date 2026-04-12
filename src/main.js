@@ -678,7 +678,6 @@ const commandList = [
 ];
 
 // 2. FUNGSI ANIMASI MENGETIK
-// Hapus semua versi typeWriter lama, ganti dengan ini:
 function typeWriter(text, element) {
   let i = 0;
   element.innerHTML = "";
@@ -768,14 +767,18 @@ function processCommand(cmd) {
     // --- LOGIKA PERINTAH ---
 
     // A. PERINTAH: HELP
+    // A. PERINTAH: HELP
     if (lowerCmd === "help") {
-      let helpMsg = "PERINTAH TERSEDIA:\n";
+      let helpMsg = "PERINTAH TERSEDIA:\n"; // Pastikan variabel ini ada di paling atas blok help
+
       commandList.forEach((item) => {
+        // Cek apakah item punya properti hidden
         if (!item.hidden) {
           helpMsg += `- <span class="text-indigo-400">${item.cmd}</span> : ${item.desc}\n`;
         }
       });
-      helpMsg += `- <span class="text-indigo-400">clear</span> : Bersihkan terminal`;
+
+      // Kirim ke fungsi append
       appendToTerminal(helpMsg);
     }
 
@@ -815,10 +818,24 @@ function processCommand(cmd) {
 }
 
 // Event Listener
-terminalInput.addEventListener("keypress", (e) => {
+terminalInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
-    processCommand(terminalInput.value);
-    terminalInput.value = "";
+    // Di sini 'this' bakal merujuk ke terminalInput secara bener
+    processCommand(this.value);
+    this.value = "";
+
+    const terminalBox = document.querySelector(".terminal-container"); // Pastikan classnya sesuai
+
+    // Tambah class untuk animasi
+    terminalBox.classList.add("flash-animation");
+
+    // Hapus class setelah animasi selesai supaya bisa diulang
+    setTimeout(() => {
+      terminalBox.classList.remove("flash-animation");
+    }, 400);
+
+    processCommand(this.value);
+    this.value = "";
   }
 });
 

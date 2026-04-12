@@ -221,3 +221,79 @@ html {
 .overdrive-active h2 span {
   background-image: linear-gradient(to r, #ff0000, #ff7b00) !important;
 }
+
+@keyframes border-flash {
+  0% {
+    border-color: #6366f1;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+  }
+  100% {
+    border-color: rgba(99, 102, 241, 0.2);
+    box-shadow: none;
+  }
+}
+
+.flash-animation {
+  animation: border-flash 0.4s ease-out;
+}
+
+.floating-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.float-item {
+  position: absolute;
+  color: rgba(99, 102, 241, 0.05); /* Sangat samar agar tidak ganggu bacaan */
+  font-family: "Monaco", monospace;
+  font-weight: bold;
+  user-select: none;
+  animation: float-move var(--duration) linear infinite alternate;
+}
+
+@keyframes float-move {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(-100px) rotate(20deg);
+  }
+}
+
+/* Berikan posisi acak untuk tiap item melalui CSS atau JS */
+.float-item:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  --duration: 8s;
+  font-size: 2rem;
+}
+.float-item:nth-child(2) {
+  top: 60%;
+  left: 80%;
+  --duration: 12s;
+  font-size: 3rem;
+}
+.float-item:nth-child(3) {
+  top: 40%;
+  left: 50%;
+  --duration: 10s;
+  font-size: 1.5rem;
+}
+.float-item:nth-child(4) {
+  top: 80%;
+  left: 20%;
+  --duration: 15s;
+  font-size: 4rem;
+}
+.float-item:nth-child(5) {
+  top: 10%;
+  left: 70%;
+  --duration: 9s;
+  font-size: 2.5rem;
+}
