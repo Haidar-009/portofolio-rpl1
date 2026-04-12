@@ -195,3 +195,29 @@ html {
 .animate-marquee-reverse {
   animation: marquee-reverse 20s linear infinite;
 }
+
+/* State Normal */
+#particle-gap {
+  --particle-color: 220; /* Biru/Indigo */
+  transition: all 0.5s ease;
+}
+
+/* State Saat Perintah 'sudo su' Aktif */
+#particle-gap.overdrive-active {
+  --particle-color: 0; /* Merah */
+  background-color: #1a0505; /* Merah sangat gelap */
+  border-color: #ef4444;
+}
+
+/* Teks Marquee jadi ngebut & merah */
+.overdrive-active .animate-marquee,
+.overdrive-active .animate-marquee-reverse {
+  animation-duration: 2s !important; /* Dari 20s jadi 2s (Ngebut!) */
+  color: #ff0000;
+  opacity: 0.2;
+}
+
+/* Judul Utama berubah warna */
+.overdrive-active h2 span {
+  background-image: linear-gradient(to r, #ff0000, #ff7b00) !important;
+}

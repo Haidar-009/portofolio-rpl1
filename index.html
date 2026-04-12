@@ -256,7 +256,7 @@
           >
             AI Assistant
             <span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
+              class="text-transparent bg-clip-text bg-liniear-to-r from-indigo-500 to-purple-600"
               >Terminal</span
             >
           </h2>
@@ -269,7 +269,7 @@
           class="flex flex-col md:flex-row gap-6 bg-slate-900/50 border border-slate-800 rounded-xl p-6 shadow-2xl relative overflow-hidden"
         >
           <div
-            class="flex-shrink-0 flex flex-col items-center justify-start md:w-1/4"
+            class="shrink-0 flex flex-col items-center justify-start md:w-1/4"
           >
             <div
               class="w-32 h-32 md:w-48 md:h-48 rounded-xl overflow-hidden border-2 border-slate-700 relative bg-[#050505] shadow-[0_0_15px_rgba(99,102,241,0.2)]"
@@ -289,7 +289,7 @@
           </div>
 
           <div
-            class="flex-grow flex flex-col bg-[#050505] border border-slate-700 rounded-lg overflow-hidden font-mono text-sm md:text-base h-96 relative shadow-inner"
+            class="grow flex flex-col bg-[#050505] border border-slate-700 rounded-lg overflow-hidden font-mono text-sm md:text-base h-96 relative shadow-inner"
           >
             <div
               class="bg-slate-900/80 px-4 py-2 flex items-center gap-2 border-b border-slate-800"
@@ -305,10 +305,10 @@
 
             <div
               id="terminalOutput"
-              class="relative flex-grow p-6 pl-10 space-y-4 bg-slate-900/40 backdrop-blur-md border-x border-indigo-500/30 overflow-y-auto h-80"
+              class="relative grow p-6 pl-10 space-y-4 bg-slate-900/40 backdrop-blur-md border-x border-indigo-500/30 overflow-y-auto h-80"
             >
               <div
-                class="pointer-events-none absolute inset-0 w-full h-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] z-50 opacity-20"
+                class="pointer-events-none absolute inset-0 w-full h-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size[length:100%_2px,3px_100%] z-50 opacity-20"
               ></div>
 
               <div
@@ -327,7 +327,7 @@
               <input
                 type="text"
                 id="terminalInput"
-                class="flex-grow bg-transparent border-none outline-none text-white focus:ring-0 w-full caret-indigo-500"
+                class="grow bg-transparent border-none outline-none text-white focus:ring-0 w-full caret-indigo-500"
                 placeholder="Ketik perintah..."
                 autocomplete="off"
               />
@@ -353,7 +353,7 @@
           "
         ></div>
         <div
-          class="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950"
+          class="absolute inset-0 bg-linear-to-b from-slate-950 via-transparent to-slate-950"
         ></div>
       </div>
 
@@ -429,62 +429,76 @@
       </div>
     </section>
 
-    <div
-      class="relative py-24 bg-slate-950 overflow-hidden border-y border-slate-900"
+    <!-- running text & partikel Gap -->
+    <section
+      id="particle-gap"
+      class="relative w-full h-[500px] bg-slate-950 overflow-hidden border-y border-slate-900"
     >
-      <div class="flex whitespace-nowrap opacity-10 rotate-[-2deg] mb-8">
-        <div
-          class="animate-marquee text-8xl font-black text-white uppercase tracking-tighter"
-        >
-          XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO
-          CODE •
-        </div>
-        <div
-          class="animate-marquee text-8xl font-black text-white uppercase tracking-tighter"
-        >
-          XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO
-          CODE •
-        </div>
-      </div>
+      <canvas
+        id="particleCanvas"
+        class="absolute inset-0 w-full h-full z-0 cursor-none"
+      ></canvas>
 
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center group">
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950 pointer-events-none z-10"
+      ></div>
+
+      <div
+        class="absolute inset-0 flex flex-col justify-center pointer-events-none z-20"
+      >
+        <div class="flex whitespace-nowrap opacity-[0.03] rotate-[-3deg] mb-12">
           <div
-            class="inline-block p-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 animate-bounce mb-6"
+            class="animate-marquee text-9xl font-black text-white uppercase italic"
           >
-            <div
-              class="bg-slate-950 rounded-full px-4 py-1 text-xs font-mono text-indigo-400"
-            >
-              SYSTEM_STATUS: ACTIVE
-            </div>
+            XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN
+            TO CODE •
           </div>
-          <h2
-            class="text-4xl md:text-6xl font-black text-white tracking-tighter"
+          <div
+            class="animate-marquee text-9xl font-black text-white uppercase italic"
           >
-            WE BUILD
-            <span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
-              >THE FUTURE</span
-            >
-          </h2>
+            XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN TO CODE • XI RPL 1 • BORN
+            TO CODE •
+          </div>
+        </div>
+
+        <div class="flex whitespace-nowrap opacity-[0.03] rotate-[3deg]">
+          <div
+            class="animate-marquee-reverse text-9xl font-black text-white uppercase italic"
+          >
+            DEVELOPER • CREATIVE • INNOVATIVE • DEVELOPER • CREATIVE •
+            INNOVATIVE •
+          </div>
+          <div
+            class="animate-marquee-reverse text-9xl font-black text-white uppercase italic"
+          >
+            DEVELOPER • CREATIVE • INNOVATIVE • DEVELOPER • CREATIVE •
+            INNOVATIVE •
+          </div>
         </div>
       </div>
 
-      <div class="flex whitespace-nowrap opacity-10 rotate-[2deg] mt-8">
+      <div
+        class="relative flex flex-col items-center justify-center h-full z-30 pointer-events-none"
+      >
         <div
-          class="animate-marquee-reverse text-8xl font-black text-white uppercase tracking-tighter"
+          class="px-4 py-1 rounded-full border border-indigo-500/50 bg-indigo-500/10 mb-4"
         >
-          DEVELOPER • CREATIVE • INNOVATIVE • DEVELOPER • CREATIVE • INNOVATIVE
-          •
+          <span
+            class="text-indigo-400 font-mono text-xs tracking-widest uppercase animate-pulse"
+            >Neural System Active</span
+          >
         </div>
-        <div
-          class="animate-marquee-reverse text-8xl font-black text-white uppercase tracking-tighter"
+        <h2
+          class="text-5xl md:text-7xl font-black text-white tracking-tighter text-center"
         >
-          DEVELOPER • CREATIVE • INNOVATIVE • DEVELOPER • CREATIVE • INNOVATIVE
-          •
-        </div>
+          WE BUILD
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
+            >THE FUTURE</span
+          >
+        </h2>
       </div>
-    </div>
+    </section>
 
     <section id="album" class="py-24 px-6 bg-white dark:bg-slate-950">
       <div class="max-w-7xl mx-auto">

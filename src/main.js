@@ -658,15 +658,22 @@ const commandList = [
   },
   {
     cmd: "mentor",
-    desc: "Daftar guru pembimbing",
+    desc: "Wali kelas XI RPL 1",
     response: "[ INFO ]\nMentor: Fitri Yulianti, S.Pd.",
   },
   { cmd: "clear", desc: "Bersihkan terminal", response: "CLEAN" },
   {
     cmd: "secret",
     desc: "???",
+    hidden: true,
     response:
       "[ SECRET ]\n Ssst! Kamu menemukan easter egg: XI RPL 1 ADALAH LEGENDA!",
+  },
+  {
+    cmd: "sudo su",
+    desc: "???",
+    hidden: true,
+    response: "[ Failed ]\n Anda Gagal! \n Root diPegang oleh Haidar 😎",
   },
 ];
 
@@ -746,29 +753,52 @@ function processCommand(cmd) {
   const lowerCmd = cmd.toLowerCase().trim();
   if (!lowerCmd) return;
 
+  // 1. Tampilkan apa yang diketik user ke terminal
   appendToTerminal(cmd, true);
 
-  // Efek Mikir
+  // 2. Efek Robot Mikir
   robotStatus.innerText = "STATUS: THINKING";
   robotStatus.classList.replace("text-indigo-400", "text-yellow-400");
 
   setTimeout(() => {
-    // LOGIKA HELP DENGAN PERULANGAN
+    // Balikkan status robot ke IDLE setelah mikir selesai
+    robotStatus.innerText = "STATUS: IDLE";
+    robotStatus.classList.replace("text-yellow-400", "text-indigo-400");
+
+    // --- LOGIKA PERINTAH ---
+
+    // A. PERINTAH: HELP
     if (lowerCmd === "help") {
       let helpMsg = "PERINTAH TERSEDIA:\n";
       commandList.forEach((item) => {
-        if (item.cmd !== "secret") {
-          // Sembunyikan perintah rahasia dari list help
+        if (!item.hidden) {
           helpMsg += `- <span class="text-indigo-400">${item.cmd}</span> : ${item.desc}\n`;
         }
       });
+      helpMsg += `- <span class="text-indigo-400">clear</span> : Bersihkan terminal`;
       appendToTerminal(helpMsg);
-    } else if (lowerCmd === "clear") {
+    }
+
+    // B. PERINTAH: SUDO SU (Mode Overdrive)
+    else if (lowerCmd === "sudo su") {
+      const gapSection = document.getElementById("particle-gap");
+      appendToTerminal("ACCESS GRANTED. INITIALIZING OVERDRIVE MODE...", false);
+
+      gapSection.classList.add("overdrive-active");
+
+      setTimeout(() => {
+        gapSection.classList.remove("overdrive-active");
+        appendToTerminal("SYSTEM STABILIZED. NORMAL MODE RESTORED.", false);
+      }, 20000);
+    }
+
+    // C. PERINTAH: CLEAR
+    else if (lowerCmd === "clear") {
       terminalOutput.innerHTML = "";
-      robotStatus.innerText = "STATUS: IDLE";
-      robotStatus.classList.replace("text-yellow-400", "text-indigo-400");
-    } else {
-      // CARI DI LIST COMMAND
+    }
+
+    // D. CARI DI COMMAND LIST (developer, motivasi, dll)
+    else {
       const found = commandList.find((c) => c.cmd === lowerCmd);
       if (found) {
         appendToTerminal(found.response);
@@ -778,7 +808,10 @@ function processCommand(cmd) {
         );
       }
     }
-  }, 400);
+
+    // Auto-scroll ke bawah setiap ada respon baru
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }, 600); // Delay 0.6 detik biar efek mikirnya kerasa
 }
 
 // Event Listener
@@ -789,7 +822,6 @@ terminalInput.addEventListener("keypress", (e) => {
   }
 });
 
-// Ganti bagian terminalBody kamu menjadi seperti ini:
 const terminalSection = document.getElementById("terminal-section"); // Gunakan ID section yang ada
 const triggerFocus = () => {
   if (terminalInput) terminalInput.focus();
@@ -806,7 +838,6 @@ const counterObserver = new IntersectionObserver(startCounter, {
 
 counters.forEach((counter) => counterObserver.observe(counter));
 
-// Jalankan fungsi saat halaman selesai dimuat
 document.addEventListener("DOMContentLoaded", () => {
   shuffleQuote();
   type();
@@ -818,6 +849,75 @@ document.addEventListener("DOMContentLoaded", () => {
   // Observasi counter
   counters.forEach((counter) => counterObserver.observe(counter));
 });
+
+const canvas = document.getElementById("particleCanvas");
+const ctx = canvas.getContext("2d");
+let particlesArray = [];
+
+// Sesuaikan ukuran canvas
+function setCanvasSize() {
+  canvas.width = canvas.parentElement.offsetWidth;
+  canvas.height = canvas.parentElement.offsetHeight;
+}
+window.addEventListener("resize", setCanvasSize);
+setCanvasSize();
+
+const mouse = { x: null, y: null };
+
+// Update posisi mouse saat berada di dalam section
+canvas.addEventListener("mousemove", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = e.clientX - rect.left;
+  mouse.y = e.clientY - rect.top;
+
+  // Buat 2 partikel setiap mouse bergerak
+  for (let i = 0; i < 2; i++) {
+    particlesArray.push(new Particle());
+  }
+});
+
+class Particle {
+  constructor() {
+    this.x = mouse.x;
+    this.y = mouse.y;
+    this.size = Math.random() * 5 + 1;
+    this.speedX = Math.random() * 3 - 1.5;
+    this.speedY = Math.random() * 3 - 1.5;
+    // Hapus this.color dari sini
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.size > 0.2) this.size -= 0.1;
+  }
+  draw() {
+    // Ambil warna real-time dari CSS Variable setiap frame digambar
+    const currentColor = getComputedStyle(
+      document.getElementById("particle-gap"),
+    ).getPropertyValue("--particle-color");
+
+    ctx.fillStyle = `hsla(${currentColor}, 80%, 50%, 0.8)`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < particlesArray.length; i++) {
+    particlesArray[i].update();
+    particlesArray[i].draw();
+
+    // Hapus partikel yang sudah mengecil
+    if (particlesArray[i].size <= 0.3) {
+      particlesArray.splice(i, 1);
+      i--;
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
 
 // Jalankan render pertama kali
 renderSiswa(daftarSiswa);
