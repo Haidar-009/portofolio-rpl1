@@ -648,11 +648,21 @@ function shuffleQuote() {
 // Jalankan saat page load
 document.addEventListener("DOMContentLoaded", shuffleQuote);
 
+/// --- 1. INISIALISASI & JAM ---
 const terminalInput = document.getElementById("terminalInput");
 const terminalOutput = document.getElementById("terminalOutput");
 const robotStatus = document.getElementById("robotStatus");
+let userName = "User"; // Simpan nama user secara global
 
-// 1. DATA PERINTAH (Mudah dikembangkan)
+function updateTime() {
+  const now = new Date();
+  const timeElement = document.getElementById("real-time");
+  if (timeElement) timeElement.innerText = now.toLocaleTimeString();
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// --- 2. DATA PERINTAH (Tetap pakai list kamu) ---
 const commandList = [
   {
     cmd: "developer",
@@ -679,25 +689,17 @@ const commandList = [
     response:
       "[ SECRET ]\n Ssst! Kamu menemukan easter egg: XI RPL 1 ADALAH LEGENDA!",
   },
-  {
-    cmd: "sudo su",
-    desc: "???",
-    hidden: true,
-    response: "[ Failed ]\n Anda Gagal! \n Root diPegang oleh Haidar 😎",
-  },
 ];
 
-// 2. FUNGSI ANIMASI MENGETIK
+// --- 3. FUNGSI ANIMASI MENGETIK (Tetap pakai punya kamu) ---
 function typeWriter(text, element) {
   let i = 0;
   element.innerHTML = "";
-
   element.style.color = "#00FF00";
   element.style.textShadow = "0 0 5px rgba(0, 255, 0, 0.7)";
 
   function typing() {
     if (i < text.length) {
-      // Cek apakah karakter saat ini adalah awal tag HTML
       if (text.charAt(i) === "<") {
         let tagEnd = text.indexOf(">", i);
         if (tagEnd !== -1) {
@@ -706,196 +708,155 @@ function typeWriter(text, element) {
           return typing();
         }
       }
-
       element.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
       i++;
       setTimeout(typing, 15);
-
-      if (terminalOutput) {
+      if (terminalOutput)
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
-      }
     } else {
-      if (robotStatus) {
-        // HANYA balik ke IDLE jika tidak sedang mode overdrive
-        if (!document.body.classList.contains("overdrive-active")) {
-          robotStatus.innerText = "STATUS: IDLE";
-          robotStatus.classList.remove("text-yellow-400", "text-indigo-400");
-          robotStatus.classList.add("text-emerald-400");
-        }
+      // Logic IDLE yang kamu buat
+      if (
+        robotStatus &&
+        !document.body.classList.contains("overdrive-active")
+      ) {
+        robotStatus.innerText = "STATUS: IDLE";
+        robotStatus.className =
+          "mt-4 text-indigo-400 font-mono text-sm border border-indigo-400 px-3 py-1 rounded-full animate-pulse";
       }
     }
   }
   typing();
 }
 
+// --- 4. FUNGSI APPEND MESSAGE ---
 function appendToTerminal(text, isUser = false) {
-  // Container utama untuk setiap baris pesan
   const wrapper = document.createElement("div");
-  // Jika user, taruh di kanan (justify-end), jika bot di kiri (justify-start)
   wrapper.className = `flex w-full ${isUser ? "justify-end" : "justify-start"} mb-4 px-4`;
-
   const bubble = document.createElement("div");
 
   if (isUser) {
-    // Style gelembung chat User (Warna Indigo/Biru)
     bubble.className =
       "bg-indigo-600 text-white px-4 py-2 rounded-2xl rounded-tr-none shadow-lg font-mono text-sm border border-indigo-400/30 relative z-10";
     bubble.innerHTML = text;
-    wrapper.appendChild(bubble);
   } else {
-    // Style gelembung chat Bot (Transparan Glassmorphism)
     bubble.className =
       "bg-slate-900/60 backdrop-blur-md text-[#00FF00] px-5 py-3 rounded-2xl rounded-tl-none border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.1)] font-mono text-sm leading-relaxed relative z-10 max-w-[85%]";
-    wrapper.appendChild(bubble);
-
-    // Jalankan animasi ngetik di dalam bubble bot
     typeWriter(text, bubble);
   }
-
+  wrapper.appendChild(bubble);
   terminalOutput.appendChild(wrapper);
-
-  // Auto scroll ke bawah
   setTimeout(() => {
     terminalOutput.scrollTop = terminalOutput.scrollHeight;
   }, 100);
 }
 
+// --- 5. LOGIC UTAMA PROSES PERINTAH ---
 function processCommand(cmd) {
   const lowerCmd = cmd.toLowerCase().trim();
   if (!lowerCmd) return;
 
-  // 1. Tampilkan apa yang diketik user ke terminal
   appendToTerminal(cmd, true);
-
-  // 2. Efek Robot Mikir
   robotStatus.innerText = "STATUS: THINKING";
-  robotStatus.classList.replace("text-indigo-400", "text-yellow-400");
+  robotStatus.className =
+    "mt-4 text-yellow-400 font-mono text-sm border border-yellow-400 px-3 py-1 rounded-full animate-pulse";
 
   setTimeout(() => {
-    // Balikkan status robot ke IDLE setelah mikir selesai
-    robotStatus.innerText = "STATUS: IDLE";
-    robotStatus.classList.replace("text-yellow-400", "text-indigo-400");
+    // --- FITUR BARU: MY NAME IS ---
+    if (lowerCmd.startsWith("my name is ")) {
+      userName = cmd.substring(11);
+      appendToTerminal(
+        `[ SYSTEM ] Hello ${userName}! I have saved your profile to the session.`,
+      );
+      return;
+    }
 
-    // --- LOGIKA PERINTAH ---
+    // --- FITUR BARU: GOTO ---
+    if (lowerCmd.startsWith("goto ")) {
+      const target = lowerCmd.split(" ")[1];
+      const section =
+        document.getElementById(target + "-section") ||
+        document.getElementById(target);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        appendToTerminal(
+          `[ NAV ] Redirecting ${userName} to ${target.toUpperCase()}...`,
+        );
+      } else {
+        appendToTerminal(`[ ERROR ] Section '${target}' not found.`);
+      }
+      return;
+    }
 
-    // A. PERINTAH: HELP
-    // A. PERINTAH: HELP
+    // --- FITUR: HELP ---
     if (lowerCmd === "help") {
-      let helpMsg = "PERINTAH TERSEDIA:\n"; // Pastikan variabel ini ada di paling atas blok help
-
+      let helpMsg = `Halo ${userName}! Berikut perintahnya:\n`;
       commandList.forEach((item) => {
-        // Cek apakah item punya properti hidden
-        if (!item.hidden) {
+        if (!item.hidden)
           helpMsg += `- <span class="text-indigo-400">${item.cmd}</span> : ${item.desc}\n`;
-        }
       });
-
-      // Kirim ke fungsi append
+      helpMsg += `- <span class="text-indigo-400">goto [id]</span> : Pindah section\n`;
+      helpMsg += `- <span class="text-indigo-400">my name is [nama]</span> : Kenalan\n`;
       appendToTerminal(helpMsg);
     }
 
-    // B. PERINTAH: SUDO SU (Mode Overdrive)
+    // --- FITUR: SUDO SU (Overdrive) ---
     else if (lowerCmd === "sudo su") {
-      const gapSection = document.getElementById("particle-gap");
-      const body = document.body;
-      const robotStatus = document.getElementById("robotStatus");
-      const robotAvatar = document.getElementById("robotAvatar");
-
-      // Simpan data lama buat balikin nanti
-      const originalStatus = "STATUS: IDLE";
-      const originalImg = "img/terminal/download.jpg";
-
-      appendToTerminal(
-        "ACCESS GRANTED.\n INITIALIZING OVERDRIVE MODE...",
-        false,
-      );
-
-      // MASUK MODE OVERDRIVE
-      body.classList.add("overdrive-active");
-      gapSection.classList.add("overdrive-active");
-
-      // Ubah Foto & Teks Status
-      robotAvatar.src = "img/terminal/overdrive.jpeg"; // Ganti ke foto mode serius
-      robotStatus.innerText = "STATUS: OVERDRIVE - OVERCLOCK";
-      robotStatus.style.width = "auto"; // Pastikan lebar otomatis mengikuti teks
-      robotStatus.classList.add("status-overdrive");
-
-      // Tambahkan class khusus buat warna status biar ngikut logo
-      robotStatus.classList.add("status-overdrive");
-
-      setTimeout(() => {
-        body.classList.remove("overdrive-active");
-        gapSection.classList.remove("overdrive-active");
-
-        // BALIKIN KE NORMAL
-        robotAvatar.src = originalImg;
-        robotStatus.innerText = originalStatus;
-        robotStatus.classList.remove("status-overdrive");
-
-        appendToTerminal("SYSTEM STABILIZED. NORMAL MODE RESTORED.", false);
-      }, 20000);
+      activateOverdrive();
     }
 
-    // C. PERINTAH: CLEAR
+    // --- FITUR: CLEAR ---
     else if (lowerCmd === "clear") {
       terminalOutput.innerHTML = "";
     }
 
-    // D. CARI DI COMMAND LIST (developer, motivasi, dll)
+    // --- CARI DI LIST ---
     else {
       const found = commandList.find((c) => c.cmd === lowerCmd);
-      if (found) {
-        appendToTerminal(found.response);
-      } else {
+      if (found) appendToTerminal(found.response);
+      else
         appendToTerminal(
-          `[ ERROR ] Perintah '${cmd}' tidak dikenali. Ketik 'help'.`,
+          `[ ERROR ] Command '${cmd}' unrecognized. Type 'help'.`,
         );
-      }
     }
-
-    // Auto-scroll ke bawah setiap ada respon baru
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-  }, 600); // Delay 0.6 detik biar efek mikirnya kerasa
+  }, 600);
 }
 
-// Event Listener
-terminalInput.addEventListener("keydown", function (e) {
+// --- 6. FUNGSI OVERDRIVE ---
+function activateOverdrive() {
+  const body = document.body;
+  const robotAvatar = document.getElementById("robotAvatar");
+  const visualizer = document.getElementById("visualizer");
+
+  body.classList.add("overdrive-active");
+  if (visualizer) visualizer.classList.remove("opacity-0");
+
+  robotAvatar.src = "img/terminal/overdrive.jpg";
+  robotStatus.innerText = "STATUS: OVERDRIVE - OVERCLOCK";
+  robotStatus.className =
+    "mt-4 text-red-500 font-mono text-sm border border-red-500 px-3 py-1 rounded-full animate-pulse shadow-[0_0_10px_#ff0000]";
+
+  appendToTerminal("ACCESS GRANTED. INITIALIZING OVERDRIVE MODE...");
+
+  setTimeout(() => {
+    body.classList.remove("overdrive-active");
+    if (visualizer) visualizer.classList.add("opacity-0");
+    robotAvatar.src = "img/terminal/download.jpg";
+    robotStatus.innerText = "STATUS: IDLE";
+    robotStatus.className =
+      "mt-4 text-indigo-400 font-mono text-sm border border-indigo-400 px-3 py-1 rounded-full animate-pulse";
+    appendToTerminal("SYSTEM STABILIZED. NORMAL MODE RESTORED.");
+  }, 20000);
+}
+
+// --- 7. EVENT LISTENER (Disederhanakan) ---
+terminalInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    // Di sini 'this' bakal merujuk ke terminalInput secara bener
     e.preventDefault();
-    processCommand(this.value);
-    this.value = "";
-
-    const command = this.value.trim();
-    if (command) {
-      processCommand(command);
-      this.value = ""; // Kosongkan input
-    }
-
-    const terminalBox = document.querySelector(".terminal-container"); // Pastikan classnya sesuai
-
-    // Tambah class untuk animasi
-    terminalBox.classList.add("flash-animation");
-
-    // Hapus class setelah animasi selesai supaya bisa diulang
-    setTimeout(() => {
-      terminalBox.classList.remove("flash-animation");
-    }, 400);
-
-    processCommand(this.value);
-    this.value = "";
+    const val = terminalInput.value.trim();
+    if (val) processCommand(val);
+    terminalInput.value = "";
   }
 });
-
-const terminalSection = document.getElementById("terminal-section"); // Gunakan ID section yang ada
-const triggerFocus = () => {
-  if (terminalInput) terminalInput.focus();
-};
-
-if (terminalSection) {
-  terminalSection.addEventListener("click", triggerFocus);
-  terminalSection.addEventListener("touchstart", triggerFocus);
-}
 
 const counterObserver = new IntersectionObserver(startCounter, {
   threshold: 0.5,

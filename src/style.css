@@ -415,3 +415,64 @@ html {
   text-align: center;
   transition: all 0.3s ease;
 }
+
+.bar {
+  animation: equalize 1s infinite alternate;
+}
+.bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+/* Warna merah saat Overdrive */
+.overdrive-active .bar {
+  background-color: #ff0000;
+  box-shadow: 0 0 5px #ff0000;
+}
+
+@keyframes equalize {
+  0% {
+    height: 5px;
+  }
+  100% {
+    height: 25px;
+  }
+}
+
+/* Visualizer & Header terminal */
+/* Styling Header Terminal Jam */
+#real-time {
+  color: #6366f1; /* Warna indigo agar senada */
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+}
+
+/* Animasi Visualizer Bar */
+.v-bar {
+  animation: equalize 0.8s infinite alternate ease-in-out;
+}
+.v-bar:nth-child(1) {
+  animation-delay: -0.2s;
+}
+.v-bar:nth-child(2) {
+  animation-delay: -0.4s;
+}
+.v-bar:nth-child(3) {
+  animation-delay: -0.6s;
+}
+.v-bar:nth-child(4) {
+  animation-delay: -0.1s;
+}
+.v-bar:nth-child(5) {
+  animation-delay: -0.3s;
+}
+
+@keyframes equalize {
+  0% {
+    height: 4px;
+  }
+  100% {
+    height: 20px;
+  }
+}
