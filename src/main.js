@@ -635,6 +635,26 @@ const quotes = [
   "Teknologi bisa ganti tiap tahun, tapi dasar algoritma bakal tetap sama selamanya",
   "Jadilah programmer yang solutif, bukan cuma programmer yang sekadar 'bisa ngetik'",
   "Koding itu 10% ngetik, 90% bengong mikirin kenapa kodingannya nggak jalan pas di-run",
+  "Seorang Software Engineer yang hebat tidak hanya memecahkan masalah dengan kode, tetapi tahu kapan masalah tersebut sebenarnya tidak butuh kode sama sekali",
+  "Arsitektur yang baik bukan tentang membuat sistem yang sempurna, tapi tentang membuat sistem yang cukup fleksibel untuk diperbaiki saat ia gagal",
+  "Di balik setiap interface yang indah, ada ratusan jam optimasi dan ribuan baris kode yang berjuang agar tetap sinkron",
+  "Web adalah kanvas yang tidak pernah kering. Kita tidak sedang membangun monumen statis, melainkan organisme hidup yang terus beradaptasi dengan layar dan pengguna yang berbeda",
+  "Jangan hanya membangun untuk mereka yang memiliki koneksi tercepat; bangunlah untuk mereka yang sangat membutuhkan informasi namun memiliki akses paling terbatas",
+  "RPL mengajarkan kita bahwa 'selesai' hanyalah awal dari fase 'pemeliharaan'. Sebuah karya tidak berhenti saat di-deploy, melainkan saat ia berhenti berguna",
+  "Dokumentasi adalah surat cinta untuk rekan satu timmu. Tanpanya, setiap perubahan kode adalah teka-teki yang menyakitkan",
+  "Kualitas perangkat lunak bukanlah sebuah variabel yang bisa dikompromikan demi kecepatan; ia adalah fondasi yang menentukan seberapa jauh kita bisa melangkah",
+  "Sebuah bug dalam aplikasi adalah masalah; sebuah bug dalam game yang menyenangkan sering kali disebut sebagai 'mekanik tersembunyi'. Namun, jangan biarkan itu menjadi alasan untuk malas melakukan debugging",
+  "Game yang baik adalah dialog antara pengembang dan pemain, di mana setiap tantangan adalah pertanyaan dan setiap kemenangan adalah jawaban yang memuaskan",
+  "Menulis kode itu mudah; menulis kode yang bisa dipahami manusia lain,termasuk dirimu di masa depan adalah seni yang sesungguhnya",
+  "Apapun bidangmu, ingatlah bahwa komputer tidak pernah salah, mereka hanya melakukan apa yang kita perintahkan. Jadilah pemberi instruksi yang bijak",
+  "Seorang DevOps yang sukses adalah mereka yang berhasil membuat dirinya sendiri 'tidak dibutuhkan' karena sistem yang ia bangun sudah berjalan dengan mulus secara mandiri",
+  "Di era cloud, infrastruktur bukan lagi 'hewan peliharaan' yang kita rawat satu per satu dengan cinta, melainkan 'ternak' yang harus bisa kita kelola secara massal dan efisien",
+  "Informasi adalah minyak baru, tetapi wawasan (insight) adalah mesin yang benar-benar menggerakkan dunia",
+  "Kecerdasan Buatan tidak akan menggantikan kecerdasan manusia, tapi manusia yang menggunakan AI akan menggantikan mereka yang tidak menggunakannya",
+  "Mesin belajar dari masa lalu yang kita berikan padanya. Jika kita memberikan data yang bias, kita tidak sedang menciptakan kecerdasan, melainkan prasangka digital",
+  "Tujuan akhir AI bukan untuk membuat mesin berpikir seperti manusia, tapi untuk membantu manusia berpikir lebih jauh melampaui batas biologisnya",
+  "Di dunia IT, berhenti belajar berarti mulai pensiun. Teknologi yang kamu banggakan hari ini bisa jadi artefak museum lima tahun lagi",
+  "Ingatlah: Kode yang kamu tulis mungkin hanya bertahan beberapa tahun, tetapi dampak dari solusi yang kamu ciptakan bisa mengubah cara orang hidup selamanya",
 ];
 
 function shuffleQuote() {
@@ -687,7 +707,7 @@ const commandList = [
     desc: "???",
     hidden: true,
     response:
-      "[ SECRET ]\n Ssst! Kamu menemukan easter egg: XI RPL 1 ADALAH LEGENDA!",
+      "[ SECRET ]\n Ssst! Kamu menemukan easter egg:\n XI RPL 1 ADALAH LEGENDA!",
   },
 ];
 
