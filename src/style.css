@@ -31,6 +31,7 @@ html {
 .animate-blob {
   animation: blob 7s infinite alternate;
 }
+
 /* KUNCI: Supaya Tailwind v4 mau baca class .dark di tag HTML */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -383,4 +384,34 @@ html {
 
 .hover\:text-indigo-600:hover::after {
   width: 100%;
+}
+
+/* Overide mode */
+/* Warna Status saat Overdrive (Sinkron dengan Logo) */
+.status-overdrive {
+  color: #ff0000 !important;
+  border-color: #ff0000 !important;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  animation: pulse-red 0.5s infinite !important; /* Pakai keyframe logo tadi */
+}
+
+/* Efek Glitch dikit buat foto saat overdrive */
+.overdrive-active #robotAvatar {
+  filter: drop-shadow(
+    0 0 10px rgba(255, 0, 0, 0.8)
+  ); /* Cuma kasih cahaya merah di pinggir foto */
+  transition: all 0.5s ease;
+  transform: scale(1.05);
+}
+
+#robotStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* Mencegah teks turun ke bawah */
+  min-width: fit-content; /* Mengikuti lebar teks */
+  padding: 8px 20px; /* Beri ruang ekstra kanan-kiri */
+  text-align: center;
+  transition: all 0.3s ease;
 }

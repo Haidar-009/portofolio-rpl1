@@ -512,7 +512,17 @@ document.addEventListener("keydown", (e) => {
 
 // --- LOGIKA TYPING EFFECT ---
 const txtElement = document.getElementById("typing-text");
-const words = ["CREATIVE", "SOLID", "XI RPL 1", "FUTURE CODER"];
+const words = [
+  "XI RPL 1",
+  "CREATIVE",
+  "WEB DEVELOPER",
+  "SOLID",
+  "ANGKATAN 22",
+  "SOFTWARE ENGGINER",
+  "PROGRAMMER",
+  "FUTURE CODER",
+  "",
+];
 let wait = 2000; // Jeda waktu saat teks sudah lengkap terketik
 let isDeleting = false;
 let txt = "";
@@ -682,7 +692,6 @@ function typeWriter(text, element) {
   let i = 0;
   element.innerHTML = "";
 
-  // Paksa warna hijau agar tetap terlihat di Light Mode
   element.style.color = "#00FF00";
   element.style.textShadow = "0 0 5px rgba(0, 255, 0, 0.7)";
 
@@ -707,9 +716,12 @@ function typeWriter(text, element) {
       }
     } else {
       if (robotStatus) {
-        robotStatus.innerText = "STATUS: IDLE";
-        robotStatus.classList.remove("text-yellow-400", "text-indigo-400");
-        robotStatus.classList.add("text-emerald-400");
+        // HANYA balik ke IDLE jika tidak sedang mode overdrive
+        if (!document.body.classList.contains("overdrive-active")) {
+          robotStatus.innerText = "STATUS: IDLE";
+          robotStatus.classList.remove("text-yellow-400", "text-indigo-400");
+          robotStatus.classList.add("text-emerald-400");
+        }
       }
     }
   }
@@ -785,22 +797,43 @@ function processCommand(cmd) {
     // B. PERINTAH: SUDO SU (Mode Overdrive)
     else if (lowerCmd === "sudo su") {
       const gapSection = document.getElementById("particle-gap");
-      const body = document.body; // Kita ambil body-nya
+      const body = document.body;
+      const robotStatus = document.getElementById("robotStatus");
+      const robotAvatar = document.getElementById("robotAvatar");
 
-      appendToTerminal("ACCESS GRANTED. INITIALIZING OVERDRIVE MODE...", false);
+      // Simpan data lama buat balikin nanti
+      const originalStatus = "STATUS: IDLE";
+      const originalImg = "img/terminal/download.jpg";
 
-      // 1. Tambah class ke body & gap biar SEMUA jadi merah
+      appendToTerminal(
+        "ACCESS GRANTED.\n INITIALIZING OVERDRIVE MODE...",
+        false,
+      );
+
+      // MASUK MODE OVERDRIVE
       body.classList.add("overdrive-active");
       gapSection.classList.add("overdrive-active");
 
+      // Ubah Foto & Teks Status
+      robotAvatar.src = "img/terminal/overdrive.jpeg"; // Ganti ke foto mode serius
+      robotStatus.innerText = "STATUS: OVERDRIVE - OVERCLOCK";
+      robotStatus.style.width = "auto"; // Pastikan lebar otomatis mengikuti teks
+      robotStatus.classList.add("status-overdrive");
+
+      // Tambahkan class khusus buat warna status biar ngikut logo
+      robotStatus.classList.add("status-overdrive");
+
       setTimeout(() => {
-        // 2. Hapus class dari body & gap biar SEMUA balik biru/normal
         body.classList.remove("overdrive-active");
         gapSection.classList.remove("overdrive-active");
 
-        // 3. Baru panggil pesan stabil
+        // BALIKIN KE NORMAL
+        robotAvatar.src = originalImg;
+        robotStatus.innerText = originalStatus;
+        robotStatus.classList.remove("status-overdrive");
+
         appendToTerminal("SYSTEM STABILIZED. NORMAL MODE RESTORED.", false);
-      }, 20000); // 20 detik
+      }, 20000);
     }
 
     // C. PERINTAH: CLEAR
@@ -829,8 +862,15 @@ function processCommand(cmd) {
 terminalInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     // Di sini 'this' bakal merujuk ke terminalInput secara bener
+    e.preventDefault();
     processCommand(this.value);
     this.value = "";
+
+    const command = this.value.trim();
+    if (command) {
+      processCommand(command);
+      this.value = ""; // Kosongkan input
+    }
 
     const terminalBox = document.querySelector(".terminal-container"); // Pastikan classnya sesuai
 
