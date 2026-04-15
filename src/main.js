@@ -64,7 +64,7 @@ const daftarSiswa = [
     bio: "Desain adalah passion.",
     ig: "#",
     github: "#",
-    foto: "/img/cracas.jpg",
+    foto: "/img/Cracas.jpg",
   },
   {
     nama: "Danar",
@@ -521,7 +521,9 @@ const words = [
   "SOFTWARE ENGGINER",
   "PROGRAMMER",
   "FUTURE CODER",
-  "",
+  "Programmer",
+  "IT Support",
+  "Data analis",
 ];
 let wait = 2000; // Jeda waktu saat teks sudah lengkap terketik
 let isDeleting = false;
@@ -673,6 +675,10 @@ const quotes = [
   "Jangan menertawakan kode lama yang berantakan; kode itulah yang membayar gajimu hari ini",
   "Desain yang baik adalah desain yang tidak disadari. Jika pengguna harus berpikir, berarti kamu gagal",
   "Teknologi hanyalah alat. Manusia adalah tujuannya. Jangan sampai kita terlalu sibuk memperbaiki mesin hingga lupa untuk siapa mesin itu dibuat",
+  "Ilmu itu bukan apa yang dihafal, tapi apa yang dimanfaatkan",
+  "Jika kamu tak sangup menahan lelah karena belajar, maka kamu harus derita karena kebodohan",
+  "open a bokk and open your mind",
+  "",
 ];
 
 function shuffleQuote() {
