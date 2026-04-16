@@ -22,7 +22,7 @@ Repository ini berisi kumpulan karya dan portofolio siswa **XI RPL 1**. Di sini 
 
 ### 🛠️ Tech Used in This Class
 
-<p align="left">
+<p align="center">
   <img src="https://skillicons.dev/icons?i=html,css,js,tailwind,bootstrap,vite,git,github" />
 </p>
 
