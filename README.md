@@ -10,7 +10,15 @@
 
 ### 📖 About This Project
 
-Repository ini berisi kumpulan karya dan portofolio siswa **XI RPL 1**. Di sini kami belajar membangun pengalaman digital menggunakan teknologi web modern.
+Repository ini berisi kumpulan karya dan portofolio siswa **XI RPL 1**. Di sini kami belajar membangun pengalaman digital menggunakan teknologi web modern. Project utama kami menggunakan **Interactive AI Terminal** sebagai pusat navigasi.
+
+### ✨ Core Features
+
+- **🤖 AI Terminal Emulator:** Navigasi interaktif menggunakan perintah teks (CLI) seperti `goto`, `help`, dan `clear`.
+- **⚡ Overdrive Mode (Sudo Su):** Transformasi visual seluruh web dengan akselerasi hardware dan efek cyberpunk.
+- **📱 Mobile Optimized:** Pengalaman responsif dengan _smart-grid_ (Instagram style) dan tombol kirim terminal khusus mobile.
+- **🚀 Performance First:** Implementasi _Lazy Loading_ dan `content-visibility` untuk scrolling yang super halus.
+- **💾 Memory System:** Terminal dapat mengingat identitas user melalui sesi interaktif.
 
 ### 🛠️ Tech Used in This Class
 
@@ -42,4 +50,4 @@ Berikut adalah daftar siswa dan link ke portofolio masing-masing:
 
 ---
 
-<p align="center">Made  by Haidar XI RPL 1</p>
+<p align="center">Built with 💻 and ☕ by Haidar XI RPL 1</p>
