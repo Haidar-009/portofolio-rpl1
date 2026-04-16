@@ -15,16 +15,16 @@ html {
 
 @keyframes blob {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   33% {
-    transform: translate(30px, -50px) scale(1.1);
+    transform: translate3d(30px, -50px, 0) scale(1.1);
   }
   66% {
-    transform: translate(-20px, 20px) scale(0.9);
+    transform: translate3d(-20px, 20px, 0) scale(0.9);
   }
   100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
@@ -74,6 +74,10 @@ html {
 
 #modal-siswa.flex {
   animation: fadeIn 0.3s ease-out;
+}
+
+.student-card img {
+  pointer-events: none; /* Supaya event hover gak kena ke gambar di dalem card, fokus ke card aja */
 }
 
 #modal-siswa > div:last-child {
@@ -260,10 +264,10 @@ html {
 
 @keyframes float-move {
   from {
-    transform: translateY(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   to {
-    transform: translateY(-100px) rotate(20deg);
+    transform: translate3d(0, -100px, 0) rotate(20deg);
   }
 }
 
@@ -325,6 +329,74 @@ html {
   /* Sembunyikan elemen melayang yang terlalu ramai di HP */
   .float-item:nth-child(even) {
     display: none;
+  }
+
+  .backdrop-blur-md,
+  .backdrop-blur-sm {
+    backdrop-filter: none !important;
+    background-color: rgba(
+      15,
+      23,
+      42,
+      0.95
+    ) !important; /* Buat lebih solid saja */
+  }
+
+  /* Kurangi shadow yang kompleks */
+  .shadow-2xl {
+    shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Nama Student */
+  .student-card h3 {
+    font-size: 0.875rem !important; /* text-sm */
+    line-height: 1.25rem !important;
+    padding: 0.5rem 0.5rem 0 0.5rem !important;
+  }
+
+  /* Jabatan/Role */
+  .student-card p {
+    font-size: 0.65rem !important; /* Sangat kecil untuk role */
+    padding: 0 0.5rem 0.75rem 0.5rem !important;
+    letter-spacing: 0px !important;
+  }
+
+  /* --- KHUSUS ALBUM MOBILE --- */
+
+  /* Memaksa Grid Album jadi 3 kolom kecil */
+  #album-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 4px !important; /* Jarak antar foto sangat tipis di HP */
+    padding: 0 10px !important;
+  }
+
+  /* Mengubah bentuk kartu jadi kotak (Square) & radius lebih kecil di HP */
+  #album-grid .group {
+    aspect-ratio: 1 / 1 !important; /* Dari 4/5 jadi 1/1 di HP */
+    border-radius: 8px !important; /* Radius 2.5rem terlalu besar untuk kartu kecil */
+  }
+
+  /* Menyembunyikan overlay teks di mobile agar tidak menutupi foto yang sudah kecil */
+  #album-grid .group div {
+    display: none !important;
+  }
+
+  #mobileSendBtn {
+    display: flex !important; /* Pastikan muncul di mobile */
+    min-width: 35px;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+  }
+
+  /* Beri sedikit ruang agar input tidak terlalu mepet ke tombol */
+  #terminalInput {
+    padding-right: 45px !important;
+  }
+}
+
+/* Sembunyikan secara total di desktop */
+@media (min-width: 768px) {
+  #mobileSendBtn {
+    display: none !important;
   }
 }
 
@@ -474,5 +546,36 @@ html {
   }
   100% {
     height: 20px;
+  }
+}
+
+/* Optimasi Kartu Siswa */
+.student-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 400px; /* Estimasi lebar & tinggi kartu kamu */
+  will-change: transform; /* Kasih tau browser kalau elemen ini bakal gerak/hover */
+}
+
+@keyframes blob {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(30px, -50px, 0) scale(1.1);
+  }
+  66% {
+    transform: translate3d(-20px, 20px, 0) scale(0.9);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes float-move {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(0, -100px, 0) rotate(20deg);
   }
 }

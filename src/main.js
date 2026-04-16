@@ -2,7 +2,11 @@ import "./style.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-AOS.init({ duration: 1000, once: true });
+AOS.init({
+  once: true, // Animasi cuma sekali
+  duration: 800,
+  offset: 100, // Mulai animasi sedikit lebih awal agar terasa responsif
+});
 
 const clickSound = new Audio(
   "https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3",
@@ -735,7 +739,7 @@ const commandList = [
   },
 ];
 
-// --- 3. FUNGSI ANIMASI MENGETIK (Tetap pakai punya kamu) ---
+// --- 3. FUNGSI ANIMASI MENGETIK
 function typeWriter(text, element) {
   let i = 0;
   element.innerHTML = "";
@@ -758,7 +762,6 @@ function typeWriter(text, element) {
       if (terminalOutput)
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
     } else {
-      // Logic IDLE yang kamu buat
       if (
         robotStatus &&
         !document.body.classList.contains("overdrive-active")
@@ -805,7 +808,6 @@ function processCommand(cmd) {
     "mt-4 text-yellow-400 font-mono text-sm border border-yellow-400 px-3 py-1 rounded-full animate-pulse";
 
   setTimeout(() => {
-    // --- FITUR BARU: MY NAME IS ---
     if (lowerCmd.startsWith("my name is ")) {
       userName = cmd.substring(11);
       appendToTerminal(
@@ -814,7 +816,7 @@ function processCommand(cmd) {
       return;
     }
 
-    // --- FITUR BARU: GOTO ---
+    //  Fitur: GOTO ---
     if (lowerCmd.startsWith("goto ")) {
       const target = lowerCmd.split(" ")[1];
       const section =
@@ -899,6 +901,33 @@ terminalInput.addEventListener("keydown", (e) => {
     const val = terminalInput.value.trim();
     if (val) processCommand(val);
     terminalInput.value = "";
+  }
+});
+
+const mobileSendBtn = document.getElementById("mobileSendBtn");
+
+// Fungsi pembantu biar gak nulis logic dua kali
+function handleCommandExecution() {
+  const val = terminalInput.value.trim();
+  if (val) {
+    processCommand(val);
+    terminalInput.value = ""; // Kosongkan input
+  }
+}
+
+// Event klik untuk tombol mobile
+if (mobileSendBtn) {
+  mobileSendBtn.addEventListener("click", () => {
+    handleCommandExecution();
+    terminalInput.focus(); // Tetap fokus ke input setelah kirim
+  });
+}
+
+// Update juga event listener Enter kamu biar pakai fungsi yang sama
+terminalInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    handleCommandExecution();
   }
 });
 
