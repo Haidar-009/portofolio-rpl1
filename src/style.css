@@ -303,6 +303,15 @@ html {
   font-size: 2.5rem;
 }
 
+/* Efek Highlight untuk Fitur Find */
+.highlight-card {
+  transition: all 0.5s ease-in-out;
+  border-color: #6366f1 !important; /* Warna Indigo */
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.8) !important;
+  transform: scale(1.05);
+  z-index: 10;
+}
+
 /* Optimization for Mobile (Screen < 768px) */
 @media (max-width: 767px) {
   /* Kurangi font terminal & padding container */
@@ -391,6 +400,11 @@ html {
   #terminalInput {
     padding-right: 45px !important;
   }
+
+  .highlight-card {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.6) !important;
+    transform: scale(1.02);
+  }
 }
 
 /* Sembunyikan secara total di desktop */
@@ -421,7 +435,6 @@ html {
   }
 }
 
-/* Animasi Pulse Merah (Overdrive Active) */
 /* Pastikan class ini dipicu oleh class 'overdrive-active' di body atau parent */
 .overdrive-active .logo-rpl {
   animation: pulse-red 0.5s infinite !important; /* Lebih cepat & agresif */

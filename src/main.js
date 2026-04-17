@@ -596,6 +596,7 @@ const startCounter = (entries, observer) => {
 // Coding Quotes Logic
 const quotes = [
   "Hidup itu kayak koding, banyak error tapi harus tetap dicari solusinya",
+  "Sejago apa pun kamu, kalau belum backup data sebelum PC lab restart otomatis, kamu belum jadi legenda",
   "Satu titik koma (;) bisa ngerusak segalanya, begitu juga satu kesalahan kecil dalam hidup",
   "Jangan cuma jago copas kode, tapi harus paham logikanya juga",
   "Gak ada bug yang gak bisa diperbaiki, yang ada cuma programmer yang kurang kopi",
@@ -682,7 +683,27 @@ const quotes = [
   "Ilmu itu bukan apa yang dihafal, tapi apa yang dimanfaatkan",
   "Jika kamu tak sangup menahan lelah karena belajar, maka kamu harus derita karena kebodohan",
   "open a bokk and open your mind",
-  "",
+  "User Interface (UI) adalah tubuh, tapi User Experience (UX) adalah jiwa. Sesuatu yang cantik tanpa kegunaan hanyalah pajangan yang mengesalkan",
+  "angan jatuh cinta pada desainmu; jatuh cintalah pada cara desainmu mempermudah hidup orang lain",
+  "Seorang arsitek tidak membangun untuk hari ini, tapi untuk sepuluh tahun ke depan saat teknologi yang digunakan sekarang sudah dianggap kuno",
+  "Kesederhanaan dalam struktur adalah bentuk kecanggihan yang paling sulit dicapai",
+  "Data yang tidak memiliki cadangan (backup) adalah data yang sebenarnya tidak kamu inginkan. Jangan menangis saat ia hilang, karena kamu sudah membiarkannya pergi sejak awal",
+  "Jangan pernah menghapus sebaris kode yang tidak kamu mengerti hanya karena ia terlihat 'aneh'. Bisa jadi itulah satu-satunya hal yang menahan seluruh sistem agar tidak runtuh",
+  "Dalam dunia IT, logika akan membawamu dari A ke B, tetapi imajinasi dan ketabahan akan membawamu melampaui batas yang dianggap mustahil oleh orang lain",
+  "Belajar RPL itu belajar sabar. Sabar nyari titik koma (;) yang hilang, dan sabar nunggu gradle build yang nggak selesai-selesai",
+  "Jangan sombong kalau kodemu running di percobaan pertama. Justru di situlah kamu harus curiga, 'Kok bisa? Ada yang nggak beres nih'",
+  "Cinta itu kayak coding. Kalau nggak ada kecocokan, mau dipaksa bagaimanapun hasilnya pasti error",
+  "Di sekolah kita diajari bahasa pemrograman, tapi di industri kita belajar bahasa manusia agar program kita berguna",
+  "Copy-paste itu sah saja, asal kamu paham apa yang kamu paste. Jangan jadi kurir kode, jadilah pemilik logika",
+  "Guru kedua setelah bapak/ibu guru di kelas adalah Stack Overflow dan dokumentasi resmi",
+  "Spesifikasi laptop bukan alasan untuk berhenti belajar. Kreativitas justru sering muncul saat sumber daya terbatas",
+  "Teknologi berkembang tiap detik. Kalau kamu malas update ilmu, kamu bakal jadi software versi lama yang penuh bug",
+  "Punya PC spek dewa nggak menjamin kamu jadi ahli kalau nggak pernah latihan ngoprek",
+  "Tanpa error, kita nggak bakal pernah belajar cara kerja sistem yang sebenarnya",
+  "Error adalah teman, bukan lawan",
+  "Hardware bisa dibeli, Skill harus dicari",
+  "Update terus, jangan mau stuck",
+  "Jangan cuma mengejar sertifikat, kejar kompetensinya. Sertifikat bisa difotokopi, tapi logic dan insting troubleshooting nggak bisa dipalsukan",
 ];
 
 function shuffleQuote() {
@@ -798,6 +819,7 @@ function appendToTerminal(text, isUser = false) {
 }
 
 // --- 5. LOGIC UTAMA PROSES PERINTAH ---
+// --- 5. LOGIC UTAMA PROSES PERINTAH ---
 function processCommand(cmd) {
   const lowerCmd = cmd.toLowerCase().trim();
   if (!lowerCmd) return;
@@ -808,6 +830,7 @@ function processCommand(cmd) {
     "mt-4 text-yellow-400 font-mono text-sm border border-yellow-400 px-3 py-1 rounded-full animate-pulse";
 
   setTimeout(() => {
+    // 1. Fitur: MY NAME IS
     if (lowerCmd.startsWith("my name is ")) {
       userName = cmd.substring(11);
       appendToTerminal(
@@ -816,7 +839,7 @@ function processCommand(cmd) {
       return;
     }
 
-    //  Fitur: GOTO ---
+    // 2. Fitur: GOTO
     if (lowerCmd.startsWith("goto ")) {
       const target = lowerCmd.split(" ")[1];
       const section =
@@ -833,39 +856,102 @@ function processCommand(cmd) {
       return;
     }
 
-    // --- FITUR: HELP ---
+    // 3. Fitur: FIND (Ditaruh di sini agar dibaca sebelum error)
+    if (lowerCmd.startsWith("find ")) {
+      const searchTerm = lowerCmd.substring(5).trim();
+      // Kita cari semua div di dalam container siswa
+      const container = document.getElementById("siswa-container");
+      const cards = container.querySelectorAll("div");
+      let found = false;
+
+      cards.forEach((card) => {
+        const nameElement = card.querySelector("h3");
+        if (nameElement) {
+          const studentName = nameElement.innerText.toLowerCase();
+
+          if (studentName.includes(searchTerm)) {
+            found = true;
+
+            // Pastikan class student-card ada untuk keperluan styling highlight
+            card.classList.add("student-card");
+
+            // Scroll ke arah target
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            // Beri efek highlight yang sudah kita buat di CSS
+            card.classList.add("highlight-card");
+            setTimeout(() => {
+              card.classList.remove("highlight-card");
+            }, 3000);
+          }
+        }
+      });
+
+      if (found) {
+        appendToTerminal(
+          `System: Index found for "${searchTerm}". Redirecting...`,
+        );
+      } else {
+        appendToTerminal(
+          `[ ERROR ] "${searchTerm}" is not registered in XI RPL 1 database.`,
+        );
+      }
+      return;
+    }
+
+    // 4. Fitur: HELP
     if (lowerCmd === "help") {
       let helpMsg = `Halo ${userName}! Berikut perintahnya:\n`;
       commandList.forEach((item) => {
         if (!item.hidden)
           helpMsg += `- <span class="text-indigo-400">${item.cmd}</span> : ${item.desc}\n`;
       });
+      helpMsg += `- <span class="text-indigo-400">find [nama]</span> : Cari siswa\n`;
       helpMsg += `- <span class="text-indigo-400">goto [id]</span> : Pindah section\n`;
       helpMsg += `- <span class="text-indigo-400">my name is [nama]</span> : Kenalan\n`;
       appendToTerminal(helpMsg);
     }
 
-    // --- FITUR: SUDO SU (Overdrive) ---
+    // 5. Fitur: SUDO SU (Overdrive)
     else if (lowerCmd === "sudo su") {
       activateOverdrive();
     }
 
-    // --- FITUR: CLEAR ---
+    // 6. Fitur: CLEAR
     else if (lowerCmd === "clear") {
       terminalOutput.innerHTML = "";
     }
 
-    // --- CARI DI LIST ---
+    // 7. CARI DI LIST (Command Biasa)
     else {
       const found = commandList.find((c) => c.cmd === lowerCmd);
-      if (found) appendToTerminal(found.response);
-      else
+      if (found) {
+        appendToTerminal(found.response);
+      } else {
         appendToTerminal(
           `[ ERROR ] Command '${cmd}' unrecognized. Type 'help'.`,
         );
+      }
     }
-  }, 600);
+  }, 500); // Delay sedikit untuk feel "berpikir"
 }
+
+// Contoh bagian generator kamu
+daftarSiswa.forEach((siswa) => {
+  const card = document.createElement("div");
+  // KUNCINYA DI SINI: Harus ada class 'student-card'
+  card.className =
+    "student-card group relative overflow-hidden rounded-2xl bg-slate-800";
+
+  card.innerHTML = `
+    <img src="${siswa.foto}" alt="${siswa.nama}" class="...">
+    <div class="p-4">
+      <h3 class="text-white font-bold">${siswa.nama}</h3>
+      <p class="text-slate-400 text-xs">${siswa.role}</p>
+    </div>
+  `;
+  document.getElementById("siswa-container").appendChild(card);
+});
 
 // --- 6. FUNGSI OVERDRIVE ---
 function activateOverdrive() {
