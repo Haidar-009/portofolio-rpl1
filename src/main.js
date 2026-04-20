@@ -735,6 +735,7 @@ const quotes = [
   "The best firewall is between the chair and the keyboard. Most 'hacks' aren't about breaking code; they're about tricking people",
   "AI won't take your job, but a human who knows how to use AI better than you will. Stay curious",
   "Software is the soul, Hardware is the body. One cannot thrive without the other—treat your thermal paste with respect",
+  "Jangan jadikan tatapan sebagai harapan",
 ];
 
 function shuffleQuote() {
