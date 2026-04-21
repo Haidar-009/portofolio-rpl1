@@ -762,6 +762,7 @@ const quotes = [
   "Discipline can outperform talent in the digital world",
   "Every expert once searched for answers like a beginner",
   "Bugs test patience more than intelligence",
+  "Jangan Lupa bawa tumbler",
 ];
 
 function shuffleQuote() {
