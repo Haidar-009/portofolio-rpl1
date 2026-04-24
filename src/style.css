@@ -437,7 +437,7 @@ html {
 
 /* Pastikan class ini dipicu oleh class 'overdrive-active' di body atau parent */
 .overdrive-active .logo-rpl {
-  animation: pulse-red 0.5s infinite !important; /* Lebih cepat & agresif */
+  animation: pulse-red 0.5s infinite !important; 
 }
 
 @keyframes pulse-red {
