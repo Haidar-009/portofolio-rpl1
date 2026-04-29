@@ -803,6 +803,7 @@ const quotes = [
   "Aplikasi hebat dibangun satu commit kecil setiap hari",
   "Jika pengguna bingung, sistemlah yang gagal menjelaskan",
   "Tidak ada kode paling sempurna, hanya kode yang cukup baik untuk saat ini",
+  "Mie ayam Khas damay",
 ];
 
 function shuffleQuote() {
